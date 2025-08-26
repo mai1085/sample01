@@ -1,0 +1,824 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    color: #333;
+    font-family: "游ゴシック体", "YuGothic", "游ゴシック Medium",
+        "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+    letter-spacing: 0.1em;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+li {
+    list-style: none;
+}
+
+:root {
+    --brand: #0a4d79;
+    /* メイン（青） */
+    --brand-700: #083b5d;
+    --accent: #1fa97a;
+    /* 差し色（緑） */
+    --accent-700: #177f5c;
+    --ink: #0e1a20;
+    /* 文字色 */
+    --muted: #6b7a82;
+    /* 補助文字 */
+    --bg: #f4f7f8;
+    /* 下地 */
+    --surface: #ffffff;
+    /* カード */
+    --border: #e4ecef;
+    /* 枠線 */
+    --radius: 16px;
+    /* 角丸 */
+    --shadow: 0 10px 28px rgba(10, 27, 30, .08);
+    --container: 1180px;
+    /* 最大幅 */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    color: var(--ink);
+    background: #fff
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block
+}
+
+a {
+    color: var(--brand);
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+.container {
+    width: min(100%, var(--container));
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+.section {
+    padding: 64px 0
+}
+
+.hd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px
+}
+
+h2 {
+    font-size: clamp(1.25rem, 1.05rem + 1.5vw, 1.8rem);
+    margin: 0
+}
+
+.sub {
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: .04em
+}
+
+.btn {
+    display: inline-block;
+    padding: .75rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow);
+    font-weight: 600
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--accent)
+}
+
+/* ====== Header / Global Nav ====== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, .94);
+    /* Fallback */
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ヘッダー行：高さはロゴに追従 */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: clamp(80px, 9.5vw, 108px);
+}
+
+/* 左：ロゴ＋サイト名 */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand img {
+    width: auto;
+    height: clamp(76px, 8.5vw, 96px);
+    display: block;
+}
+
+.brand .title {
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
+/* 右：ナビ */
+.links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.links a {
+    color: var(--ink);
+    padding: 6px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    line-height: 1;
+    /* タップ高さの基礎をフラットに */
+}
+
+.links a:hover {
+    background: #f4f7f8;
+}
+
+/* インラインCTA */
+.cta-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* モバイル調整 */
+@media (max-width: 860px) {
+    .brand img {
+        height: clamp(60px, 9.5vw, 72px);
+    }
+
+    .nav {
+        min-height: clamp(60px, 9.5vw, 72px);
+    }
+
+    /* タップ領域を確保（縦44px目安） */
+    .links a {
+        padding: 10px 8px;
+    }
+
+    /* 上下 +4px */
+}
+
+/* 超ワイドで少しだけ締める（任意） */
+@media (min-width: 1400px) {
+    .brand img {
+        height: 92px;
+    }
+
+    /* 96px → 92px */
+    .nav {
+        min-height: 96px;
+    }
+
+    /* 108px → 96px */
+}
+
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background: #fff
+}
+
+.hamburger span {
+    position: relative;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    display: block
+}
+
+.hamburger span::before, .hamburger span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform .24s ease, top .24s ease
+}
+
+.hamburger span::before {
+    top: -6px
+}
+
+.hamburger span::after {
+    top: 6px
+}
+
+.hamburger.is-open span {
+    background: transparent
+}
+
+.hamburger.is-open span::before {
+    top: 0;
+    transform: rotate(45deg)
+}
+
+.hamburger.is-open span::after {
+    top: 0;
+    transform: rotate(-45deg)
+}
+
+/* Drawer 本体 */
+.drawer {
+    position: fixed;
+    top: 66px;
+    right: 0;
+    width: 88%;
+    max-width: 360px;
+    height: calc(100dvh - 66px);
+    background: #E6F4EA;
+
+    border-left: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transform: translateX(100%);
+    /* 初期は右に隠す */
+    transition: transform .28s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+/* Drawerのリンク装飾 */
+.drawer a {
+    padding: 14px 12px;
+    border-radius: 12px;
+    color: var(--ink);
+}
+
+.drawer a:hover {
+    background: #f4f7f8;
+}
+
+/* Drawerを開いた状態 */
+.drawer.open {
+    transform: translateX(0);
+    /* 横からスライドイン */
+}
+
+/* Overlay（背景の黒幕） */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .24);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s;
+}
+
+.overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== レスポンシブ切り替え ===== */
+
+/* PC表示（861px以上） */
+@media (min-width: 861px) {
+    .links {
+        display: flex;
+    }
+
+    /* 横並びメニュー表示 */
+    #hamburger {
+        display: none !important;
+    }
+
+    /* ハンバーガー非表示 */
+    #drawer, #overlay {
+        display: none !important;
+    }
+
+    /* ドロワー/オーバーレイも完全に消す */
+}
+
+/* SP表示（860px以下） */
+@media (max-width: 860px) {
+    .links {
+        display: none !important;
+    }
+
+    /* 横並びメニュー非表示 */
+    #hamburger {
+        display: block;
+    }
+
+    /* ハンバーガー表示 */
+
+    /* ドロワーは transform で隠すので、display:none は不要 */
+    #drawer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
+/* ====== Hero (Wide Slider) ====== */
+.hero {
+    margin-top: 50px;
+    padding: 0;
+    background: transparent;
+}
+
+.wideslider {
+    position: relative;
+    width: 100%;
+    padding-inline: clamp(12px, 7vw, 148px);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: transparent;
+}
+
+.ws-viewport {
+    position: relative;
+    width: 100%;
+    /* 背景色や角丸は親(.wideslider)に任せる */
+}
+
+.ws-track {
+    display: flex;
+    transition: transform .6s ease;
+    will-change: transform;
+}
+
+.ws-slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.ws-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, 0));
+}
+
+/* No-crop：どの幅でも切らさない（高さは画像の比率どおり） */
+.ws-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 680px) {
+    .wideslider {
+        padding-inline: clamp(8px, 4vw, 16px);
+    }
+
+    /* 余白だけ微調整 */
+}
+
+/* ドット＆矢印（そのままでOK） */
+.ws-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.ws-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff66;
+    border: 1px solid #fff;
+}
+
+.ws-dot.active {
+    background: #fff;
+}
+
+.ws-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: rgba(0, 0, 0, .25);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ws-arrow:hover {
+    background: rgba(0, 0, 0, .35);
+}
+
+.ws-arrow.prev {
+    left: 12px;
+}
+
+.ws-arrow.next {
+    right: 12px;
+}
+
+
+
+/* ====== Products　取扱商品 ====== */
+.products {
+    background: #fff
+}
+
+.title-hero {
+    position: relative;
+    width: 100%;
+    height: clamp(180px, 40vw, 420px);
+    /* height: clamp(120px, 24vw, 360px); */
+    /* ← 帯の高さ。必要に応じて調整 */
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-size: cover;
+    background-position: var(--bgx, 40%) var(--bgy, 32%);
+    /* ← 見せたい位置 */
+    margin-bottom: 3%;
+}
+
+/* 見出しテキスト（左基準のまま／折返し防止だけ付与） */
+.title-hero__text {
+    position: absolute;
+    left: var(--tx, 73%);
+    /* X座標：tx（未定義なら 73%） */
+    top: var(--ty, 50%);
+    /* Y座標：ty（未定義なら 50%） */
+    transform: translate(-50%, -50%);
+    margin: 0;
+
+    font-weight: 800;
+    font-size: clamp(1.6rem, 1.1rem + 2vw, 2.4rem);
+    line-height: 1.2;
+    color: #0B2E13;
+    text-shadow: none;
+    text-align: right;
+
+    /* 530px 付近での2行化を防ぐ最小限の指定 */
+    white-space: nowrap;
+    letter-spacing: .04em;
+    /* 全体の 0.1em を上書きして詰める */
+    max-width: none;
+    /* 既存の max-width: clamp(...) を打ち消し */
+}
+
+
+
+/* 狭幅だけ微縮小（必要に応じて） */
+@media (max-width: 560px) {
+    .title-hero__text {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        top: 55%;
+        /* 少し下げたい場合だけ残す。不要なら削除OK */
+    }
+}
+
+
+.products .hd-row {
+    align-items: center;
+    margin-bottom: 14px
+}
+
+.products .hd-row {
+    justify-content: center
+}
+
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px
+}
+
+.p-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow)
+}
+
+.p-card .body {
+    padding: 14px
+}
+
+.p-card h3 {
+    font-size: .95rem;
+    margin: .5rem 0 .25rem
+}
+
+.p-card p {
+    font-size: .85rem;
+    color: var(--muted);
+    margin: 0 0 .75rem;
+    line-height: 1.6
+}
+
+.p-card .btn {
+    padding: .55rem .85rem;
+    font-size: .85rem
+}
+
+/* ====== Services ====== */
+.services {
+    background: #e9f5ee
+}
+
+.leafband {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(180deg, #cfead7, transparent), url('images/leaf-bg.jpg') center/cover no-repeat;
+    border-radius: 12px;
+    margin: 0 0 22px
+}
+
+.svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px
+}
+
+.svc-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    overflow: hidden;
+    box-shadow: var(--shadow)
+}
+
+.svc-card .body {
+    padding: 16px
+}
+
+.svc-card h3 {
+    margin: .25rem 0 .5rem;
+    font-size: 1.05rem
+}
+
+.svc-card p {
+    color: var(--muted);
+    margin: 0 0 .75rem
+}
+
+/* 推奨: 変数はファイル上部に置くと管理しやすい */
+:root {
+    --news-h: 360px;
+}
+
+/* ← ここだけ変えればOK */
+
+/* ====== News ====== */
+.news-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 28px;
+}
+
+.news-grid figure img {
+    display: block;
+    width: 100%;
+    height: var(--news-h);
+    /* 右写真の高さを固定 */
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.news-list {
+    border-top: 2px solid var(--accent);
+    height: var(--news-h);
+    /* ← max-height は使わない */
+    overflow-y: auto;
+    /* 縦スクロール */
+    padding-right: 8px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--accent) #f1f5f7;
+    /* Firefox */
+}
+
+/* スクロールバー（WebKit系） */
+.news-list::-webkit-scrollbar {
+    width: 10px
+}
+
+.news-list::-webkit-scrollbar-track {
+    background: #f1f5f7;
+    border-radius: 8px
+}
+
+.news-list::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 8px;
+    border: 2px solid #f1f5f7
+}
+
+.news-item {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border)
+}
+
+.news-item time {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums
+}
+
+.news-item a {
+    color: var(--ink)
+}
+
+
+
+/* ====== Pick Up ====== */
+.pickup {
+    background: #e9f5ee
+}
+
+.pickup-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow);
+    padding: 20px
+}
+
+.pickup h3 {
+    margin: 0 0 6px
+}
+
+.pickup p {
+    color: var(--ink);
+    line-height: 1.9
+}
+
+
+
+/* ====== SNS / Footer ====== */
+.sns_text {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.sns {
+    display: flex;
+    justify-content: center;
+    gap: 28px
+}
+
+.sns a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow)
+}
+
+footer {
+    background: #0c3a22;
+    color: #e1efe7;
+    padding: 16px 0;
+    text-align: center;
+    font-size: .85rem
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 1080px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr)
+    }
+}
+
+@media (max-width: 860px) {
+    .hero-wrap {
+        grid-template-columns: 1fr
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr
+    }
+
+    .svc-grid {
+        grid-template-columns: 1fr 1fr
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+
+    .pickup-card {
+        grid-template-columns: 1fr
+    }
+
+    .links {
+        display: none
+    }
+
+    .hamburger {
+        display: flex
+    }
+}
+
+@media (max-width: 560px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .svc-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+/* ==== Scroll-in Animations ==== */
+.title-hero,
+.p-card,
+.svc-card,
+.pickup-card {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.title-hero.reveal-in,
+.p-card.reveal-in,
+.svc-card.reveal-in,
+.pickup-card.reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* カードの出現を少しランダムに（自然な感じ） */
+.p-card:nth-child(odd),
+.svc-card:nth-child(odd) {
+    transition-delay: .06s;
+}
+
+.p-card:nth-child(3n),
+.svc-card:nth-child(3n) {
+    transition-delay: .12s;
+}
