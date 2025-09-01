@@ -9,7 +9,7 @@ body {
     letter-spacing: 0.1em;
 }
 
-a {
+/* a {
     color: #333;
     text-decoration: none;
 }
@@ -17,7 +17,7 @@ a {
 img {
     width: 100%;
     vertical-align: bottom;
-}
+} */
 
 li {
     list-style: none;
@@ -45,6 +45,7 @@ li {
     --shadow: 0 10px 28px rgba(10, 27, 30, .08);
     --container: 1180px;
     /* 最大幅 */
+    --news-h: 360px;
 }
 
 *, *::before, *::after {
@@ -91,6 +92,30 @@ a:hover {
     gap: 16px;
     margin-bottom: 20px
 }
+
+/* ===== News / PickUp の見出し下線 ===== */
+.section .hd-row h2 {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.section .hd-row h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    /* 文字との余白 */
+    transform: translateX(-50%);
+    width: 100%;
+    /* 線の長さ */
+    height: 3px;
+    /* 線の太さ */
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+
 
 h2 {
     font-size: clamp(1.25rem, 1.05rem + 1.5vw, 1.8rem);
@@ -369,7 +394,13 @@ header {
     margin-top: 50px;
     padding: 0;
     background: transparent;
+     /* margin-top: clamp(60px, 9.5vw, 96px); */
+} 
+/* 固定ヘッダー分の余白を確保 */
+#home {
+  scroll-margin-top: 100px; /* ← ヘッダーの高さに合わせて調整 */
 }
+
 
 .wideslider {
     position: relative;
@@ -477,6 +508,8 @@ header {
     background: #fff
 }
 
+
+
 .title-hero {
     position: relative;
     width: 100%;
@@ -516,6 +549,28 @@ header {
     /* 既存の max-width: clamp(...) を打ち消し */
 }
 
+/* ===== 見出し（取扱商品・サービス）の下線 ===== */
+/* 見出しの下線だけを追加（レイアウトは既存のabsoluteのまま） */
+.title-hero__text {
+    z-index: 1;
+    /* 念のため帯の背景より前面に */
+}
+
+.title-hero__text::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    /* 文字との間隔 */
+    transform: translateX(-50%);
+    width: 100%;
+    /* 線の長さ（100%にすると文字幅いっぱい） */
+    height: 3px;
+    /* 線の太さ */
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
 
 
 /* 狭幅だけ微縮小（必要に応じて） */
@@ -528,15 +583,12 @@ header {
 }
 
 
+
 .products .hd-row {
     align-items: center;
-    margin-bottom: 14px
+    justify-content: center;
+    margin-bottom: 14px;
 }
-
-.products .hd-row {
-    justify-content: center
-}
-
 
 
 .product-grid {
@@ -579,14 +631,6 @@ header {
     background: #e9f5ee
 }
 
-.leafband {
-    width: 100%;
-    height: 140px;
-    background: linear-gradient(180deg, #cfead7, transparent), url('images/leaf-bg.jpg') center/cover no-repeat;
-    border-radius: 12px;
-    margin: 0 0 22px
-}
-
 .svc-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -615,10 +659,6 @@ header {
     margin: 0 0 .75rem
 }
 
-/* 推奨: 変数はファイル上部に置くと管理しやすい */
-:root {
-    --news-h: 360px;
-}
 
 
 /* ====== News ====== */
@@ -704,61 +744,71 @@ header {
 }
 
 .pickup h3 {
-  margin: 0 0 22px;
-  font-size: 1.25rem;   /* セクション見出しよりは小さく、本文よりは大きく */
-  font-weight: 600;     /* 太字だけど見出しほど強すぎない */
-  line-height: 1.5;     /* タイトル内で2行になったときも読みやすい */
-  color: #0b2e13;       /* ブランド系の濃い緑（var(--ink)より強調） */
+    margin: 0 0 22px;
+    font-size: 1.25rem;
+    /* セクション見出しよりは小さく、本文よりは大きく */
+    font-weight: 600;
+    /* 太字だけど見出しほど強すぎない */
+    line-height: 1.5;
+    /* タイトル内で2行になったときも読みやすい */
+    color: #0b2e13;
+    /* ブランド系の濃い緑（var(--ink)より強調） */
 }
 
 .pickup p {
-  font-size: 1rem;
-  line-height: 2;       /* 行間を広げて読みやすく＆高さ調整 */
-  color: var(--ink);
-   margin: 0 0 22px;
+    font-size: 1rem;
+    line-height: 2;
+    /* 行間を広げて読みやすく＆高さ調整 */
+    color: var(--ink);
+    margin: 0 0 22px;
 }
 
 
 /* Pick Up 部分などで使う小さめアイコン */
 .sns-icon {
-  width: 18px;
-  height: 18px;
-  vertical-align: middle; /* テキストと高さを揃える */
-  margin-right: 6px;      /* アイコンと文字の間隔 */
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    /* テキストと高さを揃える */
+    margin-right: 6px;
+    /* アイコンと文字の間隔 */
 }
 
 .creator-instagram {
-  margin-bottom: 30px; /* ボタンとの間に余白を作る */
+    margin-bottom: 30px;
+    /* ボタンとの間に余白を作る */
 }
 
 .creator-instagram a {
-  display: inline-flex;
-  align-items: center;
-  color: var(--ink);
-  font-size: 14px;
-  text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .creator-instagram a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .sns-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 6px;
-  display: block;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    display: block;
 }
 
 /* PC表示 (幅768px以上) */
 @media (min-width: 768px) {
-  .pickup-card {
-    padding-bottom: 12px; /* 下の余白を少なめに */
-  }
+    .pickup-card {
+        padding-bottom: 12px;
+        /* 下の余白を少なめに */
+    }
 
-  .pickup-card .btn {
-    margin-bottom: 0; /* ボタンの下余白を消す */
-  }
+    .pickup-card .btn {
+        margin-bottom: 0;
+        /* ボタンの下余白を消す */
+    }
 }
 
 
