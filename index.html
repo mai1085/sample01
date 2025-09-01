@@ -4,13 +4,16 @@
 <head>
     <meta charset="utf-8">
     <title>【公式サイト】システム・シャイン・サービス株式会社 by ホースプロジェクト3S</title>
-    <meta name="description" content="テキストテキストテキストテキストテキストテキストテキストテキスト">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
         content="システム・シャイン・サービス,ホースプロジェクト,田中勝麻,馬主,引退馬支援活動,ホテル旅館洗剤専門店,スリース,3S,有吉ゼミ,テレビ,結露ブロッカー,床の洗浄剤,消臭スプレー,消臭剤,シミ取り,業務用,洗剤,イスクリーニング,ハウスクリーニング,清掃サービス,ホテル,旅館,全旅連協定商社">
     <meta name="description"
         content="システム・シャイン・サービス株式会社は創業28年の実績、安心の全旅連協定商社です。ホテル･旅館ご用達の消臭剤やシミ取り剤をご家庭でも。清掃サービス、絨毯メンテナンス等もお任せ下さい。">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="img/favicon-512.png">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -18,7 +21,7 @@
 
     <header>
         <div class="container nav">
-            <a class="brand" href="#">
+            <a class="brand" href="#home">
                 <img src="img/logo_name.png" width="400" height="120" alt="3Sグループ本部 システムシャインサービス">
             </a>
             <nav class="links" aria-label="メインナビゲーション">
@@ -26,8 +29,9 @@
                 <a href="#about">会社概要</a>
                 <a href="#products">取扱商品</a>
                 <a href="#services">サービス</a>
-                <a href="#contact">お問い合わせ</a>
-                <a class="btn ghost" href="#line">LINEで問い合わせ</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4yBknnEEOOiy4mbEQTsHD7psMoqX1fsCIoWF_p7dZKQoaNg/viewform"
+                    target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+                <a class="btn ghost" href="https://line.me/ti/p/eijUnRbyH-">LINEで問い合わせ</a>
             </nav>
             <button id="hamburger" class="hamburger" aria-label="メニュー">
                 <span></span>
@@ -39,8 +43,9 @@
             <a href="#products">取扱商品</a>
             <a href="#services">サービス</a>
             <a href="#news">新着情報</a>
-            <a href="#contact">お問い合わせ</a>
-            <a class="btn" href="#line">LINEで問い合わせ</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4yBknnEEOOiy4mbEQTsHD7psMoqX1fsCIoWF_p7dZKQoaNg/viewform"
+                target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+            <a class="btn ghost" href="https://line.me/ti/p/eijUnRbyH-">LINEで問い合わせ</a>
         </div>
         <div id="overlay" class="overlay" aria-hidden="true"></div>
     </header>
@@ -48,7 +53,7 @@
 
     <main id="home">
         <!-- ====== Hero / Main Visual（スマホではスライド表示） ====== -->
-        <section class="hero" id="home">
+        <section class="hero" id="hero">
             <div class="wideslider" id="wideslider" aria-roledescription="carousel">
                 <div class="ws-track">
                     <div class="ws-slide"><img src="img/slider02.jpg" alt="メインビジュアル1"></div>
@@ -194,7 +199,8 @@
                                     href="https://www.tbs.co.jp/tsuburenai-mise/">
                                     TBSテレビ 「坂上&指原のつぶれない店」　放送</a></div>
                             <div class="news-item"><time>2023.05.29</time>
-                                日本テレビ「有吉ゼミ～2時間SP 水卜アナとお掃除レスキュー～」　放送</div>
+                                <span> 日本テレビ「有吉ゼミ～2時間SP 水卜アナとお掃除レスキュー～」　放送</span>
+                            </div>
                             <div class="news-item"><time>2023.01.31</time>
                                 TBS「サンドウィッチマンのどうぶつ園飼育員さんプレゼン合戦 ZOO-1グランプリ」　アルブクール出演</div>
                             <div class="news-item"><time>2023.01.26</time><a
@@ -252,7 +258,8 @@
                         rel="noopener noreferrer" aria-label="Instagram">
                         <img src="img/instagram_logo.png" alt="">
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+                    <a href="https://line.me/ti/p/eijUnRbyH-" target="_blank" rel="noopener noreferrer"
+                        aria-label="LINE">
                         <img src="img/line_logo.png" alt="">
                     </a>
                     <!-- <a href="https://www.facebook.com/systemshine" target="_blank" rel="noopener noreferrer"
@@ -269,10 +276,6 @@
     </footer>
 
 
-
-    <main>
-
-    </main>
 
     <script>
         (() => {
@@ -378,6 +381,7 @@
                 document.documentElement.style.overflow = '';
             }
 
+
             if (hamburger && drawer && overlay) {
                 hamburger.addEventListener('click', () => {
                     const isOpen = hamburger.classList.contains('is-open');
@@ -408,6 +412,8 @@
             }
         })();
     </script>
+
+
 
 </body>
 
