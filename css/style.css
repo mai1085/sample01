@@ -1,65 +1,35 @@
-html {
-    font-size: 100%;
-}
-
-body {
-    color: #333;
-    font-family: "游ゴシック体", "YuGothic", "游ゴシック Medium",
-        "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
-    letter-spacing: 0.1em;
-}
-
-/* a {
-    color: #333;
-    text-decoration: none;
-}
-
-img {
-    width: 100%;
-    vertical-align: bottom;
-} */
-
-li {
-    list-style: none;
-}
-
+/* ベース：全ページ共通の初期設定 */
 :root {
-    --brand: #0a4d79;
-    /* メイン（青） */
+    --brand: #0a4d79;      /* メイン（青） */
     --brand-700: #083b5d;
-    --accent: #1fa97a;
-    /* 差し色（緑） */
+    --accent: #1fa97a;     /* 差し色（緑） */
     --accent-700: #177f5c;
-    --ink: #0e1a20;
-    /* 文字色 */
-    --muted: #6b7a82;
-    /* 補助文字 */
-    --bg: #f4f7f8;
-    /* 下地 */
-    --surface: #ffffff;
-    /* カード */
-    --border: #e4ecef;
-    /* 枠線 */
-    --radius: 16px;
-    /* 角丸 */
+    --ink: #0e1a20;        /* 文字色 */
+    --muted: #6b7a82;      /* 補助文字 */
+    --bg: #f4f7f8;         /* 下地 */
+    --surface: #ffffff;    /* カード */
+    --border: #e4ecef;     /* 枠線 */
+    --radius: 16px;        /* 角丸 */
     --shadow: 0 10px 28px rgba(10, 27, 30, .08);
-    --container: 1180px;
-    /* 最大幅 */
+    --container: 1180px;   /* 最大幅 */
     --news-h: 360px;
-
-
 }
 
 *, *::before, *::after {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    font-size: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI",
+        "Yu Gothic", Meiryo, sans-serif;
     color: var(--ink);
-    background: #fff
+    background: #fff;
+    overflow-x: clip; /* 横スクロールは基本禁止 */
 }
 
 html.no-scroll {
@@ -70,16 +40,20 @@ html.no-scroll {
 img {
     max-width: 100%;
     height: auto;
-    display: block
+    display: block;
 }
 
 a {
     color: var(--ink);
-    text-decoration: none
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
+}
+
+li {
+    list-style: none;
 }
 
 .container {
@@ -89,7 +63,7 @@ a:hover {
 }
 
 .section {
-    padding: 32px 0
+    padding: 32px 0;
 }
 
 .hd-row {
@@ -97,7 +71,7 @@ a:hover {
     justify-content: space-between;
     align-items: baseline;
     gap: 16px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 /* ===== News / PickUp の見出し下線 ===== */
@@ -111,28 +85,23 @@ a:hover {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -6px;
-    /* 文字との余白 */
+    bottom: -6px;           /* 文字との余白 */
     transform: translateX(-50%);
-    width: 100%;
-    /* 線の長さ */
-    height: 3px;
-    /* 線の太さ */
+    width: 100%;            /* 線の長さ */
+    height: 3px;            /* 線の太さ */
     background-color: var(--accent);
     border-radius: 2px;
 }
 
-
-
 h2 {
     font-size: clamp(1.25rem, 1.05rem + 1.5vw, 1.8rem);
-    margin: 0
+    margin: 0;
 }
 
 .sub {
     color: var(--muted);
     font-weight: 500;
-    letter-spacing: .04em
+    letter-spacing: .04em;
 }
 
 .btn {
@@ -143,12 +112,12 @@ h2 {
     background: var(--accent);
     color: #fff;
     box-shadow: var(--shadow);
-    font-weight: 600
+    font-weight: 600;
 }
 
 .btn.ghost {
     background: transparent;
-    color: var(--accent)
+    color: var(--accent);
 }
 
 /* ====== Header / Global Nav ====== */
@@ -157,7 +126,6 @@ header {
     top: 0;
     z-index: 50;
     background: rgba(255, 255, 255, .94);
-    /* Fallback */
     backdrop-filter: saturate(180%) blur(8px);
     -webkit-backdrop-filter: saturate(180%) blur(8px);
     border-bottom: 1px solid var(--border);
@@ -203,7 +171,6 @@ header {
     border-radius: 10px;
     white-space: nowrap;
     line-height: 1;
-    /* タップ高さの基礎をフラットに */
 }
 
 .links a:hover {
@@ -217,39 +184,55 @@ header {
     gap: 10px;
 }
 
-/* モバイル調整 */
-@media (max-width: 860px) {
-    .brand img {
-        height: clamp(60px, 9.5vw, 72px);
-    }
-
-    .nav {
-        min-height: clamp(60px, 9.5vw, 72px);
-    }
-
-    /* タップ領域を確保（縦44px目安） */
-    .links a {
-        padding: 10px 8px;
-    }
-
-    /* 上下 +4px */
+/* navメニュー　PCナビ：サービスの親 */
+.nav-item--services {
+    position: relative;
 }
 
-
-/* 超ワイドで少しだけ締める（任意） */
-@media (min-width: 1400px) {
-    .brand img {
-        height: 92px;
-    }
-
-    /* 96px → 92px */
-    .nav {
-        min-height: 96px;
-    }
-
-    /* 108px → 96px */
+/* サービスのボタン */
+.nav-link--services {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
+/* ▼マーク少し小さめに */
+.nav-caret {
+    font-size: 0.7em;
+}
+
+/* サブメニュー（初期は非表示） */
+.nav-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.5rem 0;
+    display: none;
+    z-index: 50;
+}
+
+.nav-submenu a {
+    display: block;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* PC幅ではホバーで表示 */
+@media (min-width: 769px) {
+    .nav-item--services:hover .nav-submenu {
+        display: block;
+    }
+}
 
 /* Hamburger */
 .hamburger {
@@ -260,7 +243,7 @@ header {
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    background: #fff
+    background: #fff;
 }
 
 .hamburger span {
@@ -268,39 +251,40 @@ header {
     width: 22px;
     height: 2px;
     background: var(--ink);
-    display: block
+    display: block;
 }
 
-.hamburger span::before, .hamburger span::after {
+.hamburger span::before,
+.hamburger span::after {
     content: "";
     position: absolute;
     left: 0;
     width: 22px;
     height: 2px;
     background: var(--ink);
-    transition: transform .24s ease, top .24s ease
+    transition: transform .24s ease, top .24s ease;
 }
 
 .hamburger span::before {
-    top: -6px
+    top: -6px;
 }
 
 .hamburger span::after {
-    top: 6px
+    top: 6px;
 }
 
 .hamburger.is-open span {
-    background: transparent
+    background: transparent;
 }
 
 .hamburger.is-open span::before {
     top: 0;
-    transform: rotate(45deg)
+    transform: rotate(45deg);
 }
 
 .hamburger.is-open span::after {
     top: 0;
-    transform: rotate(-45deg)
+    transform: rotate(-45deg);
 }
 
 /* Drawer 本体 */
@@ -312,15 +296,19 @@ header {
     max-width: 360px;
     height: calc(100dvh - 66px);
     background: #E6F4EA;
-
     border-left: 1px solid var(--border);
     box-shadow: var(--shadow);
-    transform: translateX(100%);
-    /* 初期は右に隠す */
+    transform: translate3d(100%, 0, 0); /* 初期は右に隠す */
     transition: transform .28s ease;
     display: flex;
     flex-direction: column;
     padding: 16px;
+    will-change: transform;
+}
+
+/* Drawerを開いた状態 */
+.drawer.open {
+    transform: translate3d(0, 0, 0);
 }
 
 /* Drawerのリンク装飾 */
@@ -334,10 +322,18 @@ header {
     background: #f4f7f8;
 }
 
-/* Drawerを開いた状態 */
-.drawer.open {
-    transform: translateX(0);
-    /* 横からスライドイン */
+/* navメニュー　スマホナビ：サービス */
+.drawer-label {
+    display: block;
+    margin-top: 0.75rem;
+    padding: 0.4rem 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.drawer-sub {
+    padding-left: 1.5rem; /* 少し字下げ */
+    font-size: 0.9rem;
 }
 
 /* Overlay（背景の黒幕） */
@@ -363,17 +359,14 @@ header {
         display: flex;
     }
 
-    /* 横並びメニュー表示 */
     #hamburger {
         display: none !important;
     }
 
-    /* ハンバーガー非表示 */
-    #drawer, #overlay {
+    #drawer,
+    #overlay {
         display: none !important;
     }
-
-    /* ドロワー/オーバーレイも完全に消す */
 }
 
 /* SP表示（860px以下） */
@@ -382,52 +375,15 @@ header {
         display: none !important;
     }
 
-    /* 横並びメニュー非表示 */
     #hamburger {
         display: block;
     }
 
-    /* ハンバーガー表示 */
-
-    /* ドロワーは transform で隠すので、display:none は不要 */
     #drawer {
         flex-direction: column;
         gap: 1rem;
     }
 }
-
-
-/* === Fix A: 横スクロールを全面禁止（はみ出し保険） === */
-html, body {
-    overflow-x: clip;
-    /* iOSも含め安全に横は切る */
-}
-
-/* === Fix B: ドロワーの「閉じ状態」を強制（競合に勝つ） === */
-#drawer {
-    transform: translate3d(100%, 0, 0) !important;
-    will-change: transform;
-}
-
-/* 開いた時だけ0に。ここは既存どおり */
-#drawer.open {
-    transform: translate3d(0, 0, 0) !important;
-}
-
-/* 念のため、SP幅時の“表示切替”に横スク禁止を重ねておく */
-@media (max-width: 860px) {
-    html, body {
-        overflow-x: clip;
-    }
-}
-
-/* PC幅では Drawer/Overlay は非表示のまま（既存と同じ思想） */
-@media (min-width: 861px) {
-    #drawer, #overlay {
-        display: none !important;
-    }
-}
-
 
 
 
@@ -1007,7 +963,7 @@ footer {
     justify-content: center;
     min-height: clamp(300px, 56vh, 640px);
     padding: clamp(28px, 6vw, 64px) 0;
-    background: url("../img/company/company_mv.jpg") center/cover no-repeat;
+    background: url("/img/company_mv.jpg") center/cover no-repeat;
     color: #fff;
     text-align: center;
 }
