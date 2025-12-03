@@ -963,7 +963,7 @@ footer {
     justify-content: center;
     min-height: clamp(300px, 56vh, 640px);
     padding: clamp(28px, 6vw, 64px) 0;
-    background: url("/img/company_mv.jpg") center/cover no-repeat;
+    background: url("../img/company_mv.jpg") center/cover no-repeat;
     color: #fff;
     text-align: center;
 }
