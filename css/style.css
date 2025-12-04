@@ -286,7 +286,6 @@ header {
     top: 0;
     transform: rotate(-45deg);
 }
-
 /* Drawer 本体 */
 .drawer {
     position: fixed;
@@ -295,15 +294,17 @@ header {
     width: 88%;
     max-width: 360px;
     height: calc(100dvh - 66px);
-    background: #E6F4EA;
+    background: #d9efe2;                 /* Aパターン */
     border-left: 1px solid var(--border);
     box-shadow: var(--shadow);
-    transform: translate3d(100%, 0, 0); /* 初期は右に隠す */
+    transform: translate3d(100%, 0, 0);   /* 初期は右に隠す */
     transition: transform .28s ease;
     display: flex;
     flex-direction: column;
     padding: 16px;
     will-change: transform;
+    overflow-y: auto;                     /* 中身が長いときは中でスクロール */
+    -webkit-overflow-scrolling: touch;    /* iPhoneでヌルっとスクロール */
 }
 
 /* Drawerを開いた状態 */
@@ -315,7 +316,13 @@ header {
 .drawer a {
     padding: 14px 12px;
     border-radius: 12px;
-    color: var(--ink);
+}
+
+/* 文字色＆太さをまとめて指定 */
+.drawer a,
+.drawer-label {
+    color: #0B2E13;        /* 濃いグリーンでコントラストUP */
+    font-weight: 550;
 }
 
 .drawer a:hover {
@@ -326,15 +333,16 @@ header {
 .drawer-label {
     display: block;
     margin-top: 0.75rem;
-    padding: 0.4rem 0;
-    font-weight: 600;
+    padding: 0.4rem 12px;   /* ← ここだけでOK（重複行を1つに） */
+    font-weight: 600;       /* 見出しだけ少し強めでも良い */
     font-size: 0.95rem;
 }
 
 .drawer-sub {
-    padding-left: 1.5rem; /* 少し字下げ */
+    padding-left: 1.5rem;   /* 少し字下げ */
     font-size: 0.9rem;
 }
+
 
 /* Overlay（背景の黒幕） */
 .overlay {
@@ -353,8 +361,8 @@ header {
 
 /* ===== レスポンシブ切り替え ===== */
 
-/* PC表示（861px以上） */
-@media (min-width: 861px) {
+/* PC表示（1025px以上） */
+@media (min-width: 1025px) {
     .links {
         display: flex;
     }
@@ -369,8 +377,8 @@ header {
     }
 }
 
-/* SP表示（860px以下） */
-@media (max-width: 860px) {
+/* SP表示（1024px以下） */
+@media (max-width: 1024px) {
     .links {
         display: none !important;
     }
@@ -384,7 +392,6 @@ header {
         gap: 1rem;
     }
 }
-
 
 
 /* ====== Hero (Wide Slider) ====== */
@@ -501,36 +508,29 @@ header {
     right: 12px;
 }
 
-
-
 /* ====== Products　取扱商品 ====== */
 .products {
-    background: #fff
+    background: #fff;
 }
 
-
-
+/* ---------- タイトル帯（ヒーロー） ---------- */
 .title-hero {
     position: relative;
     width: 100%;
-    height: clamp(180px, 40vw, 420px);
-    /* ← 帯の高さ。必要に応じて調整 */
+    height: clamp(180px, 40vw, 420px);   /* 帯の高さ */
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     background-size: cover;
-    background-position: var(--bgx, 40%) var(--bgy, 32%);
-    /* ← 見せたい位置 */
+    background-position: var(--bgx, 40%) var(--bgy, 32%); /* 見せたい位置 */
     margin-bottom: 3%;
 }
 
-/* 見出しテキスト（左基準のまま／折返し防止だけ付与） */
+/* 見出しテキスト */
 .title-hero__text {
     position: absolute;
-    left: var(--tx, 73%);
-    /* X座標：tx（未定義なら 73%） */
-    top: var(--ty, 50%);
-    /* Y座標：ty（未定義なら 50%） */
+    left: var(--tx, 73%);   /* X座標（変数がなければ 73%） */
+    top: var(--ty, 50%);    /* Y座標（変数がなければ 50%） */
     transform: translate(-50%, -50%);
     margin: 0;
 
@@ -541,124 +541,210 @@ header {
     text-shadow: none;
     text-align: right;
 
-    /* 530px 付近での2行化を防ぐ最小限の指定 */
-    white-space: nowrap;
+    white-space: nowrap;    /* 中途半端な幅での2行化を防ぐ */
     letter-spacing: .04em;
-    /* 全体の 0.1em を上書きして詰める */
     max-width: none;
-    /* 既存の max-width: clamp(...) を打ち消し */
+    z-index: 1;             /* 背景より前面に */
 }
 
-/* ===== 見出し（取扱商品・サービス）の下線 ===== */
-/* 見出しの下線だけを追加（レイアウトは既存のabsoluteのまま） */
-.title-hero__text {
-    z-index: 1;
-    /* 念のため帯の背景より前面に */
-}
-
+/* 見出しの下線 */
 .title-hero__text::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -8px;
-    /* 文字との間隔 */
+    bottom: -8px;           /* 文字との間隔 */
     transform: translateX(-50%);
-    width: 100%;
-    /* 線の長さ（100%にすると文字幅いっぱい） */
+    width: 100%;            /* 文字幅いっぱい */
     height: 3px;
-    /* 線の太さ */
     background-color: var(--accent);
     border-radius: 2px;
 }
 
-
-
-/* 狭幅だけ微縮小（必要に応じて） */
+/* 狭い幅のときだけ少し小さく・位置調整 */
 @media (max-width: 560px) {
     .title-hero__text {
         font-size: clamp(1.2rem, 5vw, 1.6rem);
         top: 55%;
-        /* 少し下げたい場合だけ残す。不要なら削除OK */
+        white-space: normal;   /* モバイルでは折り返し許可 */
+        text-align: center;
     }
 }
 
-
-
+/* ---------- 見出し行（「取扱商品」など） ---------- */
 .products .hd-row {
     align-items: center;
     justify-content: center;
     margin-bottom: 14px;
 }
 
-
+/* ---------- 商品カードグリッド ---------- */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 18px
+    gap: 18px;
 }
 
+/* 画面幅ごとのカラム数調整 */
+@media (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* iPhone SE など、かなり幅が狭い端末向け（1カラム） */
+@media (max-width: 420px) {
+    .products .product-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 420px;
+        margin-inline: auto;
+    }
+
+    .p-card {
+        max-width: 360px;
+        margin-inline: auto;
+        padding: 16px 14px;
+    }
+
+    .p-card img {
+        max-height: 200px;    /* 画像の縦を抑える */
+        width: auto;
+        margin: 0 auto 12px;
+        object-fit: contain;
+    }
+}
+
+/* ---------- 商品カード本体 ---------- */
 .p-card {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
     background: var(--surface);
-    box-shadow: var(--shadow)
+    box-shadow: var(--shadow);
+    text-align: center;        /* 画像・テキスト・ボタンを中央寄せ */
+}
+
+.p-card img {
+    display: block;
+    margin: 0 auto;
 }
 
 .p-card .body {
-    padding: 14px
+    padding: 14px;
 }
 
 .p-card h3 {
     font-size: .95rem;
-    margin: .5rem 0 .25rem
+    margin: .5rem 0 .25rem;
+    font-weight: 700;
 }
 
 .p-card p {
     font-size: .85rem;
     color: var(--muted);
     margin: 0 0 .75rem;
-    line-height: 1.6
+    line-height: 1.6;
 }
 
 .p-card .btn {
+    display: block;
+    width: 80%;               /* PCでも少し内側で中央 */
     padding: .55rem .85rem;
-    font-size: .85rem
+    font-size: .85rem;
+    margin: 12px auto 0;
+    text-align: center;
 }
+
+
 
 /* ====== Services ====== */
 .services {
-    background: #e9f5ee
+    background: #e9f5ee;
 }
 
+/* カードグリッド */
 .svc-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
 }
 
+/* 画面幅ごとのカラム数（PC→3、タブレット→2、スマホ→1） */
+@media (max-width: 960px) {
+    .svc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .svc-grid {
+        grid-template-columns: 1fr;
+        max-width: 640px;
+        margin-inline: auto;
+        gap: 18px;
+    }
+}
+
+/* カード本体 */
 .svc-card {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: #fff;
     overflow: hidden;
-    box-shadow: var(--shadow)
+    box-shadow: var(--shadow);
+}
+
+/* ★ 画像は必ずカード幅いっぱいに表示（右側の白余白対策） */
+.svc-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* スマホで縦長になりすぎないように、必要なら少しだけ高さ制限 */
+@media (max-width: 640px) {
+    .svc-card img {
+        max-height: 260px;   /* 好みに応じて 220〜280px で調整可 */
+        object-fit: cover;
+    }
 }
 
 .svc-card .body {
-    padding: 16px
+    padding: 16px;
 }
 
 .svc-card h3 {
     margin: .25rem 0 .5rem;
-    font-size: 1.05rem
+    font-size: 1.05rem;
 }
 
 .svc-card p {
     color: var(--muted);
-    margin: 0 0 .75rem
+    margin: 0 0 .75rem;
+    line-height: 1.6;
 }
 
+/* （お好み）スマホではテキストも中央寄せにしたい場合 */
+@media (max-width: 640px) {
+    .svc-card {
+        text-align: center;
+    }
+
+    .svc-card p {
+        text-align: center;
+    }
+
+    .svc-card .btn {
+        display: inline-block;
+        margin-top: 8px;
+    }
+}
 
 
 /* ====== News ====== */
@@ -671,41 +757,36 @@ header {
 .news-grid figure img {
     display: block;
     width: 100%;
-    height: var(--news-h);
-    /* 右写真の高さを固定 */
+    height: var(--news-h);        /* 右写真の高さを固定 */
     object-fit: cover;
     border-radius: var(--radius);
 }
 
 .news-list {
     border-top: 2px solid var(--accent);
-    height: var(--news-h);
-    /* ← max-height は使わない */
-    overflow-y: auto;
-    /* 縦スクロール */
+    height: var(--news-h);        /* max-height は使わない */
+    overflow-y: auto;             /* 縦スクロール */
     padding-right: 8px;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    scrollbar-width: thin;
-    /* Firefox */
+    scrollbar-width: thin;        /* Firefox */
     scrollbar-color: var(--accent) #f1f5f7;
-    /* Firefox */
 }
 
 /* スクロールバー（WebKit系） */
 .news-list::-webkit-scrollbar {
-    width: 10px
+    width: 10px;
 }
 
 .news-list::-webkit-scrollbar-track {
     background: #f1f5f7;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 .news-list::-webkit-scrollbar-thumb {
     background: var(--accent);
     border-radius: 8px;
-    border: 2px solid #f1f5f7
+    border: 2px solid #f1f5f7;
 }
 
 .news-item {
@@ -713,28 +794,28 @@ header {
     gap: 16px;
     align-items: center;
     padding: 14px 0;
-    border-bottom: 1px solid var(--border)
+    border-bottom: 1px solid var(--border);
 }
 
 .news-item time {
     color: var(--muted);
-    font-variant-numeric: tabular-nums
+    font-variant-numeric: tabular-nums;
 }
 
 .news-item a {
-    color: var(--ink)
+    color: var(--ink);
 }
-
 
 
 /* ====== Pick Up ====== */
 .pickup {
-    background: #e9f5ee
+    background: #e9f5ee;
 }
 
+/* カード全体：PCでは画像＋テキストの2カラム */
 .pickup-card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); /* 左画像：右テキスト */
     gap: 24px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -743,50 +824,42 @@ header {
     padding: 20px;
 }
 
-.pickup-card>img {
+/* 画像：比率を保ったまま横長に見せる */
+.pickup-card > img {
     width: 100%;
-    height: 400px;
-    /* 好みの高さ */
+    height: auto;
+    display: block;
     object-fit: cover;
-    /* はみ出しをトリミング */
     border-radius: var(--radius);
 }
 
-
-.pickup h3 {
+/* タイトル・本文（カード内） */
+.pickup-card h3 {
     margin: 0 0 22px;
     font-size: 1.25rem;
-    /* セクション見出しよりは小さく、本文よりは大きく */
     font-weight: 600;
-    /* 太字だけど見出しほど強すぎない */
     line-height: 1.5;
-    /* タイトル内で2行になったときも読みやすい */
     color: #0b2e13;
-    /* ブランド系の濃い緑（var(--ink)より強調） */
 }
 
-.pickup p {
+.pickup-card p {
     font-size: 1rem;
     line-height: 2;
-    /* 行間を広げて読みやすく＆高さ調整 */
     color: var(--ink);
     margin: 0 0 22px;
 }
 
-
-/* Pick Up 部分などで使う小さめアイコン */
+/* Pick Up 部分で使う小さめアイコン */
 .sns-icon {
     width: 18px;
     height: 18px;
     vertical-align: middle;
-    /* テキストと高さを揃える */
     margin-right: 6px;
-    /* アイコンと文字の間隔 */
 }
 
+/* クリエイターInstagramのリンク */
 .creator-instagram {
     margin-bottom: 30px;
-    /* ボタンとの間に余白を作る */
 }
 
 .creator-instagram a {
@@ -801,25 +874,65 @@ header {
     text-decoration: underline;
 }
 
-.sns-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
-    display: block;
+
+/* ---------- レスポンシブ ---------- */
+
+/* タブレット以下：左右の比率を少し縮める */
+@media (max-width: 960px) {
+    .pickup-card {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 2.5fr);
+        gap: 16px;
+    }
 }
 
-/* PC表示 (幅768px以上) */
+/* スマホ：画像→テキストの縦並び＋中央揃え */
+@media (max-width: 640px) {
+
+    .pickup-card {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .pickup-card > img {
+        max-height: 260px;    /* 必要なら 220〜280px で微調整 */
+        object-fit: cover;
+    }
+
+    .pickup-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+    }
+
+    .pickup-card p {
+        font-size: 0.95rem;
+        margin-bottom: 16px;
+    }
+
+    .creator-instagram {
+        text-align: center;
+    }
+
+    /* ボタンも真ん中に揃える */
+    .pickup-card .btn {
+        display: inline-block;
+        margin-inline: auto;
+    }
+}
+
+
+
+/* PC表示 (幅768px以上) でボタン下の余白だけ少し詰める */
 @media (min-width: 768px) {
     .pickup-card {
         padding-bottom: 12px;
-        /* 下の余白を少なめに */
     }
 
     .pickup-card .btn {
         margin-bottom: 0;
-        /* ボタンの下余白を消す */
     }
 }
+
 
 
 /* ====== SNS / Footer ====== */
