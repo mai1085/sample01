@@ -131,13 +131,18 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
+
+
+
+
 /* ヘッダー行：高さはロゴに追従 */
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    min-height: clamp(80px, 9.5vw, 108px);
+    /* gap: 16px;
+    min-height: clamp(80px, 9.5vw, 108px); */
+min-height: clamp(78px, 9vw, 106px);
 }
 
 /* 左：ロゴ＋サイト名 */
@@ -149,7 +154,8 @@ header {
 
 .brand img {
     width: auto;
-    height: clamp(76px, 8.5vw, 96px);
+    /* height: clamp(76px, 8.5vw, 96px); */
+    height: clamp(64px, 7.6vw, 84px);
     display: block;
 }
 
@@ -225,6 +231,13 @@ header {
     font-size: 0.9rem;
     text-decoration: none;
     white-space: nowrap;
+}
+
+/* SPだけ少し抑える（ヘッダーが間延びしない） */
+@media (max-width: 768px) {
+   .nav{ min-height: 76px; }         /* 今のままでもOK */
+  .brand img{ height: 56px; }       /* ← 52px→56pxにするのが効く */
+  header .container { padding-inline: 16px; }/* 余白が気になる場合のみ */
 }
 
 /* PC幅ではホバーで表示 */
@@ -931,6 +944,98 @@ header {
     .pickup-card .btn {
         margin-bottom: 0;
     }
+}
+/* ====== New Magical 特集 ====== */
+/* 背景はpickupと同色に */
+.pickup-feature {
+  background: #e9f5ee;
+}
+
+.section.pickup-feature {
+  padding-top: 0px;
+  padding-bottom: 60px;
+}
+
+/* PickUpと同じ“左右比率”にする（←ズレ対策） */
+.pickup-feature--split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 24px;
+  align-items: center;
+
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px; /* PickUpと同じ */
+}
+
+/* 画像：切らない（上下の文章を守る） */
+.pickup-feature__media {
+  display: flex;
+  justify-content: center;
+}
+
+.pickup-feature__img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  object-fit: contain;   /* ←見切れ防止 */
+  display: block;
+  border-radius: var(--radius);
+}
+
+/* テキスト */
+.pickup-feature__body h3 {
+  margin: 0 0 24px;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0b2e13;
+}
+
+.pickup-feature__lead {
+  margin: 0 0 20px;
+  line-height: 1.9;
+}
+
+/* ボタンが横に伸びるのを強制的に止める */
+.pickup-feature__btn {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 28px;
+}
+
+/* ====== ふわっと表示（Scroll-in Reveal 共通） ====== */
+.pickup-card,
+.pickup-feature--split {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.pickup-card.reveal-in,
+.pickup-feature--split.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* SPは今の挙動を維持 */
+@media (max-width: 768px) {
+  .pickup-feature--split {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 18px;
+  }
+
+  .pickup-feature__img {
+    max-width: 320px;
+  }
+
+  .pickup-feature__btn {
+    margin-inline: auto;
+  }
 }
 
 
