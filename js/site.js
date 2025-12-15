@@ -154,7 +154,10 @@
 
   // ========== 3) Scroll-in Reveal ==========
   (() => {
-    const reveals = document.querySelectorAll('.title-hero, .p-card, .svc-card, .pickup-card');
+   const reveals = document.querySelectorAll(
+  '.title-hero, .p-card, .svc-card, .pickup-card, .pickup-feature--split'
+);
+
     if (!reveals.length) return;
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(ent => {
