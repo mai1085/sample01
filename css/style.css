@@ -409,10 +409,9 @@ min-height: clamp(78px, 9vw, 106px);
 
 /* ====== Hero (Wide Slider) ====== */
 .hero {
-    margin-top: 50px;
-    padding: 0;
-    background: transparent;
-    /* margin-top: clamp(60px, 9.5vw, 96px); */
+  margin-top: 0;
+  padding: 0;
+  background: transparent;
 }
 
 /* 固定ヘッダー分の余白を確保 */
@@ -455,6 +454,13 @@ min-height: clamp(78px, 9vw, 106px);
     inset: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, 0));
 }
+
+/* スライド上の被せ物（擬似要素）がクリックを奪わないようにする */
+.ws-slide::before,
+.ws-slide::after {
+  pointer-events: none;
+}
+
 
 /* No-crop：どの幅でも切らさない（高さは画像の比率どおり） */
 .ws-slide img {
