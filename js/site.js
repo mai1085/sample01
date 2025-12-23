@@ -11,8 +11,8 @@
     const slider = document.querySelector('.wideslider');
     if (!slider) return;
 
-    const track   = slider.querySelector('.ws-track');
-    const slides  = Array.from(slider.querySelectorAll('.ws-slide'));
+    const track = slider.querySelector('.ws-track');
+    const slides = Array.from(slider.querySelectorAll('.ws-slide'));
     const prevBtn = slider.querySelector('.ws-arrow.prev');
     const nextBtn = slider.querySelector('.ws-arrow.next');
     const dotsWrap = slider.querySelector('.ws-dots');
@@ -50,29 +50,60 @@
     nextBtn?.addEventListener('click', () => goTo(index + 1, true));
 
     function start() { if (!timer) timer = setInterval(next, DURATION); }
-    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
-    function restart(){ stop(); start(); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); start(); }
 
     // ホバー/フォーカスで一時停止
-    ['mouseenter','focusin'].forEach(ev => slider.addEventListener(ev, stop));
-    ['mouseleave','focusout'].forEach(ev => slider.addEventListener(ev, start));
+    ['mouseenter', 'focusin'].forEach(ev => slider.addEventListener(ev, stop));
+    ['mouseleave', 'focusout'].forEach(ev => slider.addEventListener(ev, start));
 
     // スワイプ（タッチ/ドラッグ）
     let startX = 0, diffX = 0, dragging = false;
-    function onStart(x){ dragging = true; startX = x; diffX = 0; stop(); }
-    function onMove(x){ if (dragging) diffX = x - startX; }
-    function onEnd(){
-      if (!dragging) return;
-      dragging = false;
-      if (Math.abs(diffX) > SWIPE_THRESHOLD) { diffX < 0 ? next() : prev(); }
-      else { update(); start(); }
+    let isSwiped = false;
+    function onStart(x) {
+      dragging = true;
+      startX = x;
+      diffX = 0;
+      isSwiped = false; // ←★ここを追加（開始時に必ずリセット）
+      stop();
     }
+
+    function onMove(x) { if (dragging) diffX = x - startX; }
+   function onEnd(){
+  if (!dragging) return;
+  dragging = false;
+
+  isSwiped = Math.abs(diffX) > SWIPE_THRESHOLD; // ←★ここで確定
+
+  if (isSwiped) {
+    diffX < 0 ? next() : prev();
+  } else {
+    update();
+    start();
+  }
+}
+
+
     slider.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
-    slider.addEventListener('touchmove',  e => onMove(e.touches[0].clientX), { passive: true });
+    slider.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
     slider.addEventListener('touchend', onEnd);
+
     slider.addEventListener('mousedown', e => onStart(e.clientX));
     window.addEventListener('mousemove', e => onMove(e.clientX));
     window.addEventListener('mouseup', onEnd);
+
+
+    // --- リンク付きスライドのクリック制御（安定版） ---
+    slides.forEach(slide => {
+      const link = slide.querySelector('a');
+      if (!link) return;
+
+      link.addEventListener('click', e => {
+        if (isSwiped) e.preventDefault(); // ★diffXではなく確定フラグで判定
+      });
+    });
+
+
 
     // 初期化
     update(); start();
@@ -83,8 +114,8 @@
   // ========== 2) Hamburger / Drawer ==========
   (() => {
     const hamburger = document.getElementById('hamburger');
-    const drawer    = document.getElementById('drawer');
-    const overlay   = document.getElementById('overlay');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
     if (!hamburger || !drawer || !overlay) return;
 
     // A11y 初期属性
@@ -154,9 +185,9 @@
 
   // ========== 3) Scroll-in Reveal ==========
   (() => {
-   const reveals = document.querySelectorAll(
-  '.title-hero, .p-card, .svc-card, .pickup-card, .pickup-feature--split'
-);
+    const reveals = document.querySelectorAll(
+      '.title-hero, .p-card, .svc-card, .pickup-card, .pickup-feature--split'
+    );
 
     if (!reveals.length) return;
     const io = new IntersectionObserver((entries, obs) => {
