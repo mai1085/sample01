@@ -720,10 +720,18 @@ min-height: clamp(78px, 9vw, 106px);
 }
 
 /* ★ 画像は必ずカード幅いっぱいに表示（右側の白余白対策） */
+ /* .svc-card img {
+     width: 100%; 
+     height: auto;
+    display: block; 
+}  */
+
+/* ★ Services：画像の高さを統一（PCも含めてズレ解消） */
 .svc-card img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: 240px;        
+  object-fit: cover;    /* ← 画像をトリミングして高さを揃える */
+  display: block;
 }
 
 /* スマホで縦長になりすぎないように、必要なら少しだけ高さ制限 */
