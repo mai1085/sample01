@@ -984,20 +984,35 @@ min-height: clamp(78px, 9vw, 106px);
   padding: 20px; /* PickUpと同じ */
 }
 
-/* 画像：切らない（上下の文章を守る） */
-.pickup-feature__media {
-  display: flex;
-  justify-content: center;
+/* 画像枠（下段だけでもOK） */
+.pickup-feature__media{
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  /* 濃い背景：深緑グラデ（おすすめ） */
+  background: linear-gradient(180deg, #0b2e13 0%, #071c0c 100%);
 }
 
-.pickup-feature__img {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  object-fit: contain;   /* ←見切れ防止 */
-  display: block;
-  border-radius: var(--radius);
+/* 画像と背景を馴染ませる“薄い幕” */
+.pickup-feature__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.12); /* 0.08〜0.16で調整 */
+  pointer-events:none;
 }
+
+/* 画像は切らない */
+.pickup-feature__img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  max-width: none;
+  aspect-ratio: 1 / 1;   /* 今の揃いを維持 */
+  object-fit: contain;
+}
+
 
 /* テキスト */
 .pickup-feature__body h3 {
