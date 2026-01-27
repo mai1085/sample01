@@ -1,17 +1,26 @@
 /* ベース：全ページ共通の初期設定 */
 :root {
-    --brand: #0a4d79;      /* メイン（青） */
+    --brand: #0a4d79;
+    /* メイン（青） */
     --brand-700: #083b5d;
-    --accent: #1fa97a;     /* 差し色（緑） */
+    --accent: #1fa97a;
+    /* 差し色（緑） */
     --accent-700: #177f5c;
-    --ink: #0e1a20;        /* 文字色 */
-    --muted: #6b7a82;      /* 補助文字 */
-    --bg: #f4f7f8;         /* 下地 */
-    --surface: #ffffff;    /* カード */
-    --border: #e4ecef;     /* 枠線 */
-    --radius: 16px;        /* 角丸 */
+    --ink: #0e1a20;
+    /* 文字色 */
+    --muted: #6b7a82;
+    /* 補助文字 */
+    --bg: #f4f7f8;
+    /* 下地 */
+    --surface: #ffffff;
+    /* カード */
+    --border: #e4ecef;
+    /* 枠線 */
+    --radius: 16px;
+    /* 角丸 */
     --shadow: 0 10px 28px rgba(10, 27, 30, .08);
-    --container: 1180px;   /* 最大幅 */
+    --container: 1180px;
+    /* 最大幅 */
     --news-h: 360px;
 }
 
@@ -29,7 +38,8 @@ body {
         "Yu Gothic", Meiryo, sans-serif;
     color: var(--ink);
     background: #fff;
-    overflow-x: clip; /* 横スクロールは基本禁止 */
+    overflow-x: clip;
+    /* 横スクロールは基本禁止 */
 }
 
 html.no-scroll {
@@ -85,10 +95,13 @@ li {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -6px;           /* 文字との余白 */
+    bottom: -6px;
+    /* 文字との余白 */
     transform: translateX(-50%);
-    width: 100%;            /* 線の長さ */
-    height: 3px;            /* 線の太さ */
+    width: 100%;
+    /* 線の長さ */
+    height: 3px;
+    /* 線の太さ */
     background-color: var(--accent);
     border-radius: 2px;
 }
@@ -131,9 +144,10 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-
-
-
+/* ヘッダーだけ広くする */
+header .container.nav{
+  width: min(100%, 1320px);   /* 1180 → 1320 に */
+}
 
 /* ヘッダー行：高さはロゴに追従 */
 .nav {
@@ -142,7 +156,7 @@ header {
     justify-content: space-between;
     /* gap: 16px;
     min-height: clamp(80px, 9.5vw, 108px); */
-min-height: clamp(78px, 9vw, 106px);
+    min-height: clamp(78px, 9vw, 106px);
 }
 
 /* 左：ロゴ＋サイト名 */
@@ -150,6 +164,9 @@ min-height: clamp(78px, 9vw, 106px);
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-right: 18px;
+    flex: 0 0 auto;
+    min-width: 260px;
 }
 
 .brand img {
@@ -157,6 +174,8 @@ min-height: clamp(78px, 9vw, 106px);
     /* height: clamp(76px, 8.5vw, 96px); */
     height: clamp(64px, 7.6vw, 84px);
     display: block;
+
+    flex: 0 0 auto;
 }
 
 .brand .title {
@@ -182,6 +201,33 @@ min-height: clamp(78px, 9vw, 106px);
 .links a:hover {
     background: #f4f7f8;
 }
+
+/* PCナビ：a と button を同じ見た目に揃える */
+.links a,
+.links .nav-link--services {
+    color: var(--ink);
+    padding: 6px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    line-height: 1;
+    font-weight: 500;
+    /* 任意：a と同じ太さに */
+}
+
+/* hoverも揃える */
+.links a:hover,
+.links .nav-link--services:hover {
+    background: #f4f7f8;
+}
+
+/* buttonのデフォルトスタイルを完全に消す（Safari対策含む） */
+.nav-link--services {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+}
+
 
 /* インラインCTA */
 .cta-inline {
@@ -235,9 +281,21 @@ min-height: clamp(78px, 9vw, 106px);
 
 /* SPだけ少し抑える（ヘッダーが間延びしない） */
 @media (max-width: 768px) {
-   .nav{ min-height: 76px; }         /* 今のままでもOK */
-  .brand img{ height: 56px; }       /* ← 52px→56pxにするのが効く */
-  header .container { padding-inline: 16px; }/* 余白が気になる場合のみ */
+    .nav {
+        min-height: 76px;
+    }
+
+    /* 今のままでもOK */
+    .brand img {
+        height: 56px;
+    }
+
+    /* ← 52px→56pxにするのが効く */
+    header .container {
+        padding-inline: 16px;
+    }
+
+    /* 余白が気になる場合のみ */
 }
 
 /* PC幅ではホバーで表示 */
@@ -299,6 +357,7 @@ min-height: clamp(78px, 9vw, 106px);
     top: 0;
     transform: rotate(-45deg);
 }
+
 /* Drawer 本体 */
 .drawer {
     position: fixed;
@@ -307,17 +366,21 @@ min-height: clamp(78px, 9vw, 106px);
     width: 88%;
     max-width: 360px;
     height: calc(100dvh - 66px);
-    background: #d9efe2;                 /* Aパターン */
+    background: #d9efe2;
+    /* Aパターン */
     border-left: 1px solid var(--border);
     box-shadow: var(--shadow);
-    transform: translate3d(100%, 0, 0);   /* 初期は右に隠す */
+    transform: translate3d(100%, 0, 0);
+    /* 初期は右に隠す */
     transition: transform .28s ease;
     display: flex;
     flex-direction: column;
     padding: 16px;
     will-change: transform;
-    overflow-y: auto;                     /* 中身が長いときは中でスクロール */
-    -webkit-overflow-scrolling: touch;    /* iPhoneでヌルっとスクロール */
+    overflow-y: auto;
+    /* 中身が長いときは中でスクロール */
+    -webkit-overflow-scrolling: touch;
+    /* iPhoneでヌルっとスクロール */
 }
 
 /* Drawerを開いた状態 */
@@ -334,7 +397,8 @@ min-height: clamp(78px, 9vw, 106px);
 /* 文字色＆太さをまとめて指定 */
 .drawer a,
 .drawer-label {
-    color: #0B2E13;        /* 濃いグリーンでコントラストUP */
+    color: #0B2E13;
+    /* 濃いグリーンでコントラストUP */
     font-weight: 550;
 }
 
@@ -346,13 +410,16 @@ min-height: clamp(78px, 9vw, 106px);
 .drawer-label {
     display: block;
     margin-top: 0.75rem;
-    padding: 0.4rem 12px;   /* ← ここだけでOK（重複行を1つに） */
-    font-weight: 600;       /* 見出しだけ少し強めでも良い */
+    padding: 0.4rem 12px;
+    /* ← ここだけでOK（重複行を1つに） */
+    font-weight: 600;
+    /* 見出しだけ少し強めでも良い */
     font-size: 0.95rem;
 }
 
 .drawer-sub {
-    padding-left: 1.5rem;   /* 少し字下げ */
+    padding-left: 1.5rem;
+    /* 少し字下げ */
     font-size: 0.9rem;
 }
 
@@ -406,12 +473,22 @@ min-height: clamp(78px, 9vw, 106px);
     }
 }
 
+/* 中間幅（ロゴが潰れやすい幅）ではPCナビを畳む */
+@media (max-width: 1180px) {
+    .links {
+        display: none !important;
+    }
+
+    #hamburger {
+        display: block !important;
+    }
+}
 
 /* ====== Hero (Wide Slider) ====== */
 .hero {
-  margin-top: 0;
-  padding: 0;
-  background: transparent;
+    margin-top: 0;
+    padding: 0;
+    background: transparent;
 }
 
 /* 固定ヘッダー分の余白を確保 */
@@ -458,7 +535,7 @@ min-height: clamp(78px, 9vw, 106px);
 /* スライド上の被せ物（擬似要素）がクリックを奪わないようにする */
 .ws-slide::before,
 .ws-slide::after {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 
@@ -536,20 +613,24 @@ min-height: clamp(78px, 9vw, 106px);
 .title-hero {
     position: relative;
     width: 100%;
-    height: clamp(180px, 40vw, 420px);   /* 帯の高さ */
+    height: clamp(180px, 40vw, 420px);
+    /* 帯の高さ */
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     background-size: cover;
-    background-position: var(--bgx, 40%) var(--bgy, 32%); /* 見せたい位置 */
+    background-position: var(--bgx, 40%) var(--bgy, 32%);
+    /* 見せたい位置 */
     margin-bottom: 3%;
 }
 
 /* 見出しテキスト */
 .title-hero__text {
     position: absolute;
-    left: var(--tx, 73%);   /* X座標（変数がなければ 73%） */
-    top: var(--ty, 50%);    /* Y座標（変数がなければ 50%） */
+    left: var(--tx, 73%);
+    /* X座標（変数がなければ 73%） */
+    top: var(--ty, 50%);
+    /* Y座標（変数がなければ 50%） */
     transform: translate(-50%, -50%);
     margin: 0;
 
@@ -560,10 +641,12 @@ min-height: clamp(78px, 9vw, 106px);
     text-shadow: none;
     text-align: right;
 
-    white-space: nowrap;    /* 中途半端な幅での2行化を防ぐ */
+    white-space: nowrap;
+    /* 中途半端な幅での2行化を防ぐ */
     letter-spacing: .04em;
     max-width: none;
-    z-index: 1;             /* 背景より前面に */
+    z-index: 1;
+    /* 背景より前面に */
 }
 
 /* 見出しの下線 */
@@ -571,9 +654,11 @@ min-height: clamp(78px, 9vw, 106px);
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -8px;           /* 文字との間隔 */
+    bottom: -8px;
+    /* 文字との間隔 */
     transform: translateX(-50%);
-    width: 100%;            /* 文字幅いっぱい */
+    width: 100%;
+    /* 文字幅いっぱい */
     height: 3px;
     background-color: var(--accent);
     border-radius: 2px;
@@ -584,7 +669,8 @@ min-height: clamp(78px, 9vw, 106px);
     .title-hero__text {
         font-size: clamp(1.2rem, 5vw, 1.6rem);
         top: 55%;
-        white-space: normal;   /* モバイルでは折り返し許可 */
+        white-space: normal;
+        /* モバイルでは折り返し許可 */
         text-align: center;
     }
 }
@@ -632,7 +718,8 @@ min-height: clamp(78px, 9vw, 106px);
     }
 
     .p-card img {
-        max-height: 200px;    /* 画像の縦を抑える */
+        max-height: 200px;
+        /* 画像の縦を抑える */
         width: auto;
         margin: 0 auto 12px;
         object-fit: contain;
@@ -646,7 +733,8 @@ min-height: clamp(78px, 9vw, 106px);
     overflow: hidden;
     background: var(--surface);
     box-shadow: var(--shadow);
-    text-align: center;        /* 画像・テキスト・ボタンを中央寄せ */
+    text-align: center;
+    /* 画像・テキスト・ボタンを中央寄せ */
 }
 
 .p-card img {
@@ -673,7 +761,8 @@ min-height: clamp(78px, 9vw, 106px);
 
 .p-card .btn {
     display: block;
-    width: 80%;               /* PCでも少し内側で中央 */
+    width: 80%;
+    /* PCでも少し内側で中央 */
     padding: .55rem .85rem;
     font-size: .85rem;
     margin: 12px auto 0;
@@ -720,7 +809,7 @@ min-height: clamp(78px, 9vw, 106px);
 }
 
 /* ★ 画像は必ずカード幅いっぱいに表示（右側の白余白対策） */
- /* .svc-card img {
+/* .svc-card img {
      width: 100%; 
      height: auto;
     display: block; 
@@ -728,16 +817,18 @@ min-height: clamp(78px, 9vw, 106px);
 
 /* ★ Services：画像の高さを統一（PCも含めてズレ解消） */
 .svc-card img {
-  width: 100%;
-  height: 240px;        
-  object-fit: cover;    /* ← 画像をトリミングして高さを揃える */
-  display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    /* ← 画像をトリミングして高さを揃える */
+    display: block;
 }
 
 /* スマホで縦長になりすぎないように、必要なら少しだけ高さ制限 */
 @media (max-width: 640px) {
     .svc-card img {
-        max-height: 260px;   /* 好みに応じて 220〜280px で調整可 */
+        max-height: 260px;
+        /* 好みに応じて 220〜280px で調整可 */
         object-fit: cover;
     }
 }
@@ -784,19 +875,23 @@ min-height: clamp(78px, 9vw, 106px);
 .news-grid figure img {
     display: block;
     width: 100%;
-    height: var(--news-h);        /* 右写真の高さを固定 */
+    height: var(--news-h);
+    /* 右写真の高さを固定 */
     object-fit: cover;
     border-radius: var(--radius);
 }
 
 .news-list {
     border-top: 2px solid var(--accent);
-    height: var(--news-h);        /* max-height は使わない */
-    overflow-y: auto;             /* 縦スクロール */
+    height: var(--news-h);
+    /* max-height は使わない */
+    overflow-y: auto;
+    /* 縦スクロール */
     padding-right: 8px;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    scrollbar-width: thin;        /* Firefox */
+    scrollbar-width: thin;
+    /* Firefox */
     scrollbar-color: var(--accent) #f1f5f7;
 }
 
@@ -842,7 +937,8 @@ min-height: clamp(78px, 9vw, 106px);
 /* カード全体：PCでは画像＋テキストの2カラム */
 .pickup-card {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); /* 左画像：右テキスト */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    /* 左画像：右テキスト */
     gap: 24px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -852,7 +948,7 @@ min-height: clamp(78px, 9vw, 106px);
 }
 
 /* 画像：比率を保ったまま横長に見せる */
-.pickup-card > img {
+.pickup-card>img {
     width: 100%;
     height: auto;
     display: block;
@@ -921,8 +1017,9 @@ min-height: clamp(78px, 9vw, 106px);
         text-align: center;
     }
 
-    .pickup-card > img {
-        max-height: 260px;    /* 必要なら 220〜280px で微調整 */
+    .pickup-card>img {
+        max-height: 260px;
+        /* 必要なら 220〜280px で微調整 */
         object-fit: cover;
     }
 
@@ -959,112 +1056,116 @@ min-height: clamp(78px, 9vw, 106px);
         margin-bottom: 0;
     }
 }
+
 /* ====== New Magical 特集 ====== */
 /* 背景はpickupと同色に */
 .pickup-feature {
-  background: #e9f5ee;
+    background: #e9f5ee;
 }
 
 .section.pickup-feature {
-  padding-top: 0px;
-  padding-bottom: 60px;
+    padding-top: 0px;
+    padding-bottom: 60px;
 }
 
 /* PickUpと同じ“左右比率”にする（←ズレ対策） */
 .pickup-feature--split {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 24px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 24px;
+    align-items: center;
 
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px; /* PickUpと同じ */
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    /* PickUpと同じ */
 }
 
 /* 画像枠（下段だけでもOK） */
-.pickup-feature__media{
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
+.pickup-feature__media {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
 
-  /* 濃い背景：深緑グラデ（おすすめ） */
-  background: linear-gradient(180deg, #0b2e13 0%, #071c0c 100%);
+    /* 濃い背景：深緑グラデ（おすすめ） */
+    background: linear-gradient(180deg, #0b2e13 0%, #071c0c 100%);
 }
 
 /* 画像と背景を馴染ませる“薄い幕” */
-.pickup-feature__media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,.12); /* 0.08〜0.16で調整 */
-  pointer-events:none;
+.pickup-feature__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .12);
+    /* 0.08〜0.16で調整 */
+    pointer-events: none;
 }
 
 /* 画像は切らない */
-.pickup-feature__img{
-  width: 100%;
-  height: 100%;
-  display: block;
-  max-width: none;
-  aspect-ratio: 1 / 1;   /* 今の揃いを維持 */
-  object-fit: contain;
+.pickup-feature__img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    /* 今の揃いを維持 */
+    object-fit: contain;
 }
 
 
 /* テキスト */
 .pickup-feature__body h3 {
-  margin: 0 0 24px;
-  font-size: 1.45rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #0b2e13;
+    margin: 0 0 24px;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0b2e13;
 }
 
 .pickup-feature__lead {
-  margin: 0 0 20px;
-  line-height: 1.9;
+    margin: 0 0 20px;
+    line-height: 1.9;
 }
 
 /* ボタンが横に伸びるのを強制的に止める */
 .pickup-feature__btn {
-  width: fit-content;
-  max-width: 100%;
-  margin-top: 28px;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 28px;
 }
 
 /* ====== ふわっと表示（Scroll-in Reveal 共通） ====== */
 .pickup-card,
 .pickup-feature--split {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .6s ease, transform .6s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .6s ease, transform .6s ease;
 }
 
 .pickup-card.reveal-in,
 .pickup-feature--split.reveal-in {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
 /* SPは今の挙動を維持 */
 @media (max-width: 768px) {
-  .pickup-feature--split {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 18px;
-  }
+    .pickup-feature--split {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 18px;
+    }
 
-  .pickup-feature__img {
-    max-width: 320px;
-  }
+    .pickup-feature__img {
+        max-width: 320px;
+    }
 
-  .pickup-feature__btn {
-    margin-inline: auto;
-  }
+    .pickup-feature__btn {
+        margin-inline: auto;
+    }
 }
 
 

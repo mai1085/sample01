@@ -1,0 +1,560 @@
+/* =========================================================
+  results.css  - 実績・導入事例ページ専用
+  既存 all_style.css があっても崩れにくい “自己完結寄り” 設計
+========================================================= */
+
+:root {
+    /* 既存サイトと統一 */
+    --r-text: var(--ink);
+
+    /* 役割別テキストカラー */
+    --r-text-main: #2f3a3f;
+    /* 見出し・強調本文 */
+    --r-text-sub: #3f4c50;
+    /* 説明文・カード本文 */
+    --r-muted: var(--muted);
+    /* 注釈・補足（既存mutedを流用） */
+
+    --r-line: rgba(14, 26, 32, .12);
+
+    --r-bg: #ffffff;
+    --r-bg-alt: #E6F4EA;
+
+    --r-max: var(--container);
+    --r-radius: var(--radius);
+    --r-shadow: var(--shadow);
+    --r-surface: var(--surface);
+    --r-border: var(--border);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.results, .results * {
+    box-sizing: border-box;
+}
+
+
+/* style.css の .container と同じルールに統一 */
+.r-container {
+    width: min(100%, var(--r-max));
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+.r-section {
+    padding: clamp(36px, 6vw, 72px) 0;
+    background: var(--r-bg);
+    color: var(--r-text);
+}
+
+.r-section--alt {
+    background: var(--r-bg-alt);
+}
+
+.r-section__head {
+    margin-bottom: 22px;
+}
+
+/* .r-section__title {
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: .02em;
+    margin: 0 0 8px;
+}
+.r-section__title::after {
+  content: "";
+  display: block;
+  width: 280px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 8px;
+} */
+
+.r-section__title {
+    display: inline-block;
+    /* 文字幅に合わせるため */
+    position: relative;
+    padding-bottom: 12px;
+    margin: 0 0 12px;
+    /* ← desc との距離は margin で */
+    line-height: 1.15;
+}
+
+.r-section__title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+
+    /* 文字数に応じて伸びるが上限・下限あり */
+    width: clamp(140px, 100%, 420px);
+
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.r-section__desc {
+    margin: 0;
+    color: #4a5a5f;
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 60ch;
+}
+
+/* ===== Hero ===== */
+.r-hero {
+    padding: clamp(42px, 6vw, 88px) 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, .06), rgba(0, 0, 0, 0)),
+        var(--r-bg-alt);
+    border-bottom: 1px solid var(--r-line);
+}
+
+.r-hero__inner {
+    max-width: 900px;
+}
+
+.r-hero__eyebrow {
+    margin: 0 0 10px;
+    color: var(--r-muted);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.r-hero__title {
+    margin: 0 0 20px;
+    font-size: clamp(28px, 4.2vw, 44px);
+    line-height: 1.2;
+}
+
+.r-hero__lead {
+    margin: 0 0 20px;
+    color: var(--r-text);
+    font-size: 15px;
+    line-height: 1.9;
+    font-weight: 600;
+    max-width: 680px;
+}
+
+.r-hero__note {
+    border: 1px dashed var(--r-line);
+    background: rgba(255, 255, 255, .7);
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.r-hero__note p {
+    margin: 0;
+    color: var(--r-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* ===== KPI （実績）===== */
+.r-kpiGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.r-kpiCard {
+    background: var(--r-card);
+    border: 1px solid rgba(92, 177, 24, 0.45);
+    /* border: 1px solid var(--r-line); */
+    border-radius: var(--r-radius);
+    padding: 14px 14px 12px;
+    box-shadow: var(--r-shadow);
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    /* ← 高さ揃えやすくする */
+    flex-direction: column;
+    min-height: 150px;
+    /* ← 118pxだと説明文が詰まりやすい */
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+/* ===== KPI Card hover ===== */
+.r-kpiCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .10);
+    border-color: rgba(92, 177, 24, .35);
+}
+
+.r-kpiCard__label {
+    font-size: 15px;
+    /* 12px → 13px */
+    font-weight: 600;
+    color: #6b7a82;
+    margin: 0 0 6px;
+}
+
+.r-kpiCard__value {
+    margin: 0 0 2px;
+    display: flex;
+    justify-content: center;
+    /* ← これが効く */
+    align-items: baseline;
+    gap: 6px;
+}
+
+.r-kpiCard__num {
+    display: block;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--accent);
+    letter-spacing: .02em;
+}
+
+.r-kpiCard__unit {
+    display: block;
+    /* これで “件” が改行される */
+    text-align: center;
+    margin-top: 2px;
+}
+
+.r-kpiCard__sub {
+    margin: 0;
+    font-size: 14px;
+    color: var(--r-text-sub);
+    line-height: 1.8;
+    /* ← 読みやすさが上がる */
+    margin-top: 0;
+    font-weight: 400;
+    /* ← 下に揃う（カード内のリズムが整う） */
+}
+
+.r-callout {
+    margin-top: 18px;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius);
+    background: #fff;
+    padding: 14px 16px;
+}
+
+.r-callout__title {
+    margin: 0 0 6px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.r-callout__text {
+    margin: 0;
+    color: var(--r-text-sub);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== Categories 主な法人先のカテゴリ===== */
+.r-catGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.r-catCard {
+    background: #fff;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius);
+    overflow: hidden;
+    box-shadow: var(--r-shadow);
+    text-align: center;
+    /* ★ 追加：カード内中央寄せ */
+    display: flex;
+    /* ★ 追加：高さ揃えやすい */
+    flex-direction: column;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+
+}
+
+/* ===== Category Card hover ===== */
+.r-catCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .10);
+    border-color: rgba(92, 177, 24, .35);
+}
+
+.r-catCard__media {
+    height: 160px;
+    background: linear-gradient(135deg, #e9e9e9, #f7f7f7);
+    border-bottom: 1px solid var(--r-line);
+    background-size: cover;
+    background-position: center top;
+
+    transition: transform .35s ease;
+
+}
+
+/* 画像をほんのりズーム */
+.r-catCard:hover .r-catCard__media {
+    transform: scale(1.04);
+}
+
+
+/* カテゴリ別　画像 */
+.r-cat--hotel {
+    background-image: url("../img/results/cat_hotel.jpg");
+}
+
+.r-cat--medical {
+    background-image: url("../img/results/cat_medical.jpg");
+}
+
+.r-cat--care {
+    background-image: url("../img/results/cat_care.jpg");
+}
+
+.r-cat--office {
+    background-image: url("../img/results/cat_office.jpg");
+}
+
+.r-catCard__title {
+    margin: 12px 14px 16px;
+    font-size: 20px;
+}
+
+.r-catCard__text {
+    margin: 0 14px 14px;
+    color: var(--r-text-sub);
+    font-size: 14px;
+    /* KPIと揃えてOK */
+    line-height: 1.75;
+    text-wrap: pretty;
+}
+
+.r-mutedNote {
+    margin: 14px 0 0;
+    color: var(--r-muted);
+    font-size: 12px;
+}
+
+/* ===== Reasons 選ばれている理由===== */
+.r-reasonGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.r-reasonCard {
+    background: #fff;
+    /* border:1px solid var(--r-line); */
+    border: 1px solid rgba(92, 177, 24, 0.45);
+    border-radius: var(--r-radius);
+    padding: 16px;
+    box-shadow: var(--r-shadow);
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 120px;
+    /* 揃えたい場合 */
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+/* ===== Reason Card hover ===== */
+.r-reasonCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .09);
+    border-color: rgba(92, 177, 24, .45);
+}
+
+
+.r-reasonCard__title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.r-reasonCard__text {
+    margin: 0;
+    color: var(--r-text-sub);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.r-reasonCard__note {
+    margin: 4px 0 0;
+    color: var(--r-muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.r-disclaimer {
+    margin-top: 18px;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius);
+    background: #fff;
+    padding: 14px 16px;
+}
+
+.r-disclaimer__title {
+    margin: 0 0 8px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.r-disclaimer__list {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--r-muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* Results CTA（バナー風） */
+.results-cta {
+    background: var(--r-bg-alt);
+    /* #E6F4EA */
+    padding: 52px 0;
+    margin: 42px 0 60px;
+}
+
+.results-cta .r-container {
+    border: 1px solid rgba(92, 177, 24, .22);
+    border-radius: calc(var(--r-radius) + 8px);
+    background: rgba(255, 255, 255, .75);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .06);
+    padding: clamp(18px, 3vw, 28px);
+    text-align: center;
+}
+
+.results-cta h2 {
+    margin: 0 0 .4em;
+    font-size: clamp(18px, 2.2vw, 24px);
+}
+
+.results-cta p {
+    margin: 0 0 1.1em;
+    color: var(--r-text-sub);
+    line-height: 1.9;
+}
+
+/* ボタン並び */
+.results-cta__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CTAボタン（大きめ + 動き） */
+.r-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(14, 26, 32, .16);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--r-text);
+    background: #fff;
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.r-btn,
+.r-btn:hover,
+.r-btn:focus-visible,
+.r-btn:visited {
+    text-decoration: none;
+}
+
+/* メイン（“バナーっぽい主役”） */
+.r-btn--cta {
+    background: var(--accent);
+    color: #fff;
+    border-color: rgba(92, 177, 24, .35);
+    box-shadow: 0 10px 20px rgba(92, 177, 24, .18);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 光が走る（hover時だけで上品） */
+.r-btn--cta::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -60%;
+    width: 60%;
+    height: 180%;
+    transform: rotate(20deg);
+    background: rgba(255, 255, 255, .26);
+    transition: left .45s ease;
+}
+
+.r-btn--cta:hover::after,
+.r-btn--cta:focus-visible::after {
+    left: 120%;
+}
+
+/* hover / focus */
+.r-btn:hover,
+.r-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .10);
+    outline: none;
+}
+
+
+/* サブ（ゴースト） */
+.r-btn--ghost {
+    background: transparent;
+    border-color: rgba(14, 26, 32, .20);
+}
+
+/* SP */
+@media (max-width: 560px) {
+    .results-cta__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .r-btn {
+        width: 100%;
+    }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+    .r-kpiGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .r-catGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .r-reasonGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .r-catCard__media {
+        height: 104px;
+    }
+}
+
+/* =========================================================
+  Hover Effects（Results page only）
+========================================================= */
