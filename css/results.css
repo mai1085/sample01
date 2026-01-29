@@ -425,8 +425,8 @@
 .results-cta {
     background: var(--r-bg-alt);
     /* #E6F4EA */
-    padding: 52px 0;
-    margin: 42px 0 60px;
+   padding: 44px 0;
+    margin: 32px 0 44px;
 }
 
 .results-cta .r-container {
@@ -577,6 +577,22 @@
         grid-template-columns: 1fr;
         max-width: 520px;
         margin: 0 auto;
+    }
+
+    .results-cta__actions {
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+    }
+
+    .results-cta__actions .r-btn {
+        width: min(360px, 100%);
+    }
+
+    .r-btn {
+        min-height: 56px;
+        /* 少し大きく（体感で効く） */
+        font-size: 16px;
     }
 }
 
