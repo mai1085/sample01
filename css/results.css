@@ -217,9 +217,13 @@
 
 .r-kpiCard__unit {
     display: block;
-    /* これで “件” が改行される */
     text-align: center;
     margin-top: 2px;
+    font-weight: 700;
+    /* あると締まる（任意） */
+    color: var(--r-text);
+    /* もし変数なければ #111 など */
+    line-height: 1.1;
 }
 
 .r-kpiCard__sub {
@@ -534,6 +538,8 @@
     }
 }
 
+
+
 /* ===== Responsive ===== */
 @media (max-width: 980px) {
     .r-kpiGrid {
@@ -545,13 +551,32 @@
     }
 }
 
-@media (max-width: 560px) {
-    .r-reasonGrid {
+/* ===== Smartphone ===== */
+@media (max-width: 640px) {
+    .r-kpiGrid {
         grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 420px;
+        margin: 0 auto;
+
+    }
+
+    .r-catGrid {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
     .r-catCard__media {
-        height: 104px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        /* 4/3 にするとさらに縦が確保される */
+        background-position: center;
+    }
+
+    .r-reasonGrid {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        margin: 0 auto;
     }
 }
 
