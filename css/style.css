@@ -279,6 +279,46 @@ header .container.nav{
     white-space: nowrap;
 }
 
+
+/* ===== ナビの現在地（active） ===== */
+
+/* PCだけ下線を使う */
+.links a.is-active{
+  color: var(--accent-700);
+  font-weight: 700;
+  position: relative;
+}
+
+/* 下線（PCのみ） */
+.links a.is-active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:100%;
+  height:2px;
+  background: var(--accent-700);
+  border-radius:999px;
+  pointer-events: none; /* クリック妨害を防ぐ */
+}
+
+/* ★スマホでは下線をオフ */
+@media (max-width: 1180px) {
+  .links a.is-active::after {
+    display: none;
+  }
+}
+
+/* ドロワー（ハンバーガー内）は文字色だけ */
+.drawer a.is-active{
+  color: var(--accent-700);
+  font-weight: 700;
+}
+
+
+
+
+
 /* SPだけ少し抑える（ヘッダーが間延びしない） */
 @media (max-width: 768px) {
     .nav {
@@ -438,51 +478,51 @@ header .container.nav{
     opacity: 1;
     pointer-events: auto;
 }
-
 /* ===== レスポンシブ切り替え ===== */
 
-/* PC表示（1025px以上） */
-@media (min-width: 1025px) {
-    .links {
-        display: flex;
-    }
+/* 1181px以上 → PCナビ */
+@media (min-width: 1181px) {
+  .links {
+    display: flex;
+  }
 
-    #hamburger {
-        display: none !important;
-    }
-
-    #drawer,
-    #overlay {
-        display: none !important;
-    }
+  #hamburger,
+  #drawer,
+  #overlay {
+    display: none !important;
+  }
 }
 
-/* SP表示（1024px以下） */
-@media (max-width: 1024px) {
-    .links {
-        display: none !important;
-    }
-
-    #hamburger {
-        display: block;
-    }
-
-    #drawer {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-
-/* 中間幅（ロゴが潰れやすい幅）ではPCナビを畳む */
+/* 1180px以下 → ハンバーガー */
 @media (max-width: 1180px) {
-    .links {
-        display: none !important;
-    }
+  .links {
+    display: none !important;
+  }
+
+  /* #hamburger {
+    display: block !important;
+  } */
 
     #hamburger {
-        display: block !important;
-    }
+    display: flex !important;      /* ← block → flex に変更 */
+    align-items: center;
+    justify-content: center;
+    padding: 0;                   /* 保険：ズレ防止 */
+  }
+
+  #drawer {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
+
+
+
+
+
+
+
+
 
 /* ====== Hero (Wide Slider) ====== */
 .hero {
