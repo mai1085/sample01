@@ -516,14 +516,6 @@ header .container.nav{
   }
 }
 
-
-
-
-
-
-
-
-
 /* ====== Hero (Wide Slider) ====== */
 .hero {
     margin-top: 0;
@@ -1240,6 +1232,22 @@ footer {
     text-align: center;
     font-size: .85rem
 }
+
+footer a{
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer a:hover{
+  opacity: .85;
+}
+
+footer .is-active {
+  color: #9dff9d; /* うっすら明るい緑 */
+  font-weight: 700;
+}
+
+
 
 /* ====== Responsive ====== */
 @media (max-width: 1080px) {
@@ -2624,3 +2632,56 @@ Services（全体）追加スタイル
     font-weight: 700;
     color: #0a5b1e;
 }
+
+/* privacyページ用（共通で使ってOK） */
+/* ===== プライバシーポリシー専用レイアウト ===== */
+
+/* プライバシー専用の余白（お問い合わせと揃える） */
+.page-privacy .section{
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.page-privacy {
+  background: #f6faf7; /* お問い合わせと同じ薄い緑 */
+   padding: 0;
+}
+
+.privacy-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center; /* 全体中央揃え */
+}
+
+/* 見出しの下線を統一 */
+.privacy-title{
+  position: relative;
+  padding-bottom: 24px;
+  margin-bottom: 0%;   
+  text-align: center;
+}
+
+.privacy-title::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+  width:170px;
+  height:4px;
+  background: var(--accent-700);
+  border-radius:999px;
+}
+
+
+/* 白いカード */
+.privacy-card {
+  background: #fff;
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  text-align: left;
+margin-top: 32px; 
+}
+
+
