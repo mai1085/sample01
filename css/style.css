@@ -72,9 +72,9 @@ li {
     padding-inline: 20px;
 }
 
-.section {
+/* .section {
     padding: 32px 0;
-}
+} */
 
 .hd-row {
     display: flex;
@@ -1012,6 +1012,8 @@ header .container.nav{
     margin-right: 6px;
 }
 
+
+
 /* クリエイターInstagramのリンク */
 .creator-instagram {
     margin-bottom: 30px;
@@ -1224,6 +1226,8 @@ header .container.nav{
     border: 1px solid var(--border);
     box-shadow: var(--shadow)
 }
+
+
 
 footer {
     background: #0c3a22;
@@ -2638,7 +2642,7 @@ Services（全体）追加スタイル
 
 /* プライバシー専用の余白（お問い合わせと揃える） */
 .page-privacy .section{
-  padding: clamp(56px, 8vw, 96px) 0;
+  padding: clamp(28px, 5vw, 64px) 0;
 }
 
 .page-privacy {

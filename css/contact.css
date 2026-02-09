@@ -77,6 +77,9 @@
 }
 
 
+.section {
+    padding: 32px 0;
+}
 
 /* Googleフォーム */
 .gform {
