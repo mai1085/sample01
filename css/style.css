@@ -1,3 +1,28 @@
+/* =====================================================
+   3S GROUP OFFICIAL SITE - style.css
+   最終更新：2026-02
+
+
+   【目次】
+
+   01. Base / Reset / Variables（共通設定）
+   02. Layout / Common Components（container / btn / 見出しなど）
+   03. Header / Navigation（ヘッダー・ナビ・ハンバーガー）
+   04. Hero / Slider（トップビジュアル）
+   05. Products（取扱商品）
+   06. Services（サービス）
+   07. News / PickUp
+   08. Company Page
+   09. Product Detail Pages
+   10. Service Detail Pages
+   11. Footer / SNS
+   12. Animation / Scroll Effects
+   13. Responsive
+
+===================================================== */
+
+
+
 /* ベース：全ページ共通の初期設定 */
 :root {
     --brand: #0a4d79;
@@ -145,8 +170,9 @@ header {
 }
 
 /* ヘッダーだけ広くする */
-header .container.nav{
-  width: min(100%, 1320px);   /* 1180 → 1320 に */
+header .container.nav {
+    width: min(100%, 1320px);
+    /* 1180 → 1320 に */
 }
 
 /* ヘッダー行：高さはロゴに追従 */
@@ -283,36 +309,37 @@ header .container.nav{
 /* ===== ナビの現在地（active） ===== */
 
 /* PCだけ下線を使う */
-.links a.is-active{
-  color: var(--accent-700);
-  font-weight: 700;
-  position: relative;
+.links a.is-active {
+    color: var(--accent-700);
+    font-weight: 700;
+    position: relative;
 }
 
 /* 下線（PCのみ） */
-.links a.is-active::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:100%;
-  height:2px;
-  background: var(--accent-700);
-  border-radius:999px;
-  pointer-events: none; /* クリック妨害を防ぐ */
+.links a.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-700);
+    border-radius: 999px;
+    pointer-events: none;
+    /* クリック妨害を防ぐ */
 }
 
 /* ★スマホでは下線をオフ */
 @media (max-width: 1180px) {
-  .links a.is-active::after {
-    display: none;
-  }
+    .links a.is-active::after {
+        display: none;
+    }
 }
 
 /* ドロワー（ハンバーガー内）は文字色だけ */
-.drawer a.is-active{
-  color: var(--accent-700);
-  font-weight: 700;
+.drawer a.is-active {
+    color: var(--accent-700);
+    font-weight: 700;
 }
 
 
@@ -478,42 +505,45 @@ header .container.nav{
     opacity: 1;
     pointer-events: auto;
 }
+
 /* ===== レスポンシブ切り替え ===== */
 
 /* 1181px以上 → PCナビ */
 @media (min-width: 1181px) {
-  .links {
-    display: flex;
-  }
+    .links {
+        display: flex;
+    }
 
-  #hamburger,
-  #drawer,
-  #overlay {
-    display: none !important;
-  }
+    #hamburger,
+    #drawer,
+    #overlay {
+        display: none !important;
+    }
 }
 
 /* 1180px以下 → ハンバーガー */
 @media (max-width: 1180px) {
-  .links {
-    display: none !important;
-  }
+    .links {
+        display: none !important;
+    }
 
-  /* #hamburger {
+    /* #hamburger {
     display: block !important;
   } */
 
     #hamburger {
-    display: flex !important;      /* ← block → flex に変更 */
-    align-items: center;
-    justify-content: center;
-    padding: 0;                   /* 保険：ズレ防止 */
-  }
+        display: flex !important;
+        /* ← block → flex に変更 */
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        /* 保険：ズレ防止 */
+    }
 
-  #drawer {
-    flex-direction: column;
-    gap: 1rem;
-  }
+    #drawer {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
 /* ====== Hero (Wide Slider) ====== */
@@ -1237,18 +1267,19 @@ footer {
     font-size: .85rem
 }
 
-footer a{
-  color: #fff;
-  text-decoration: underline;
+footer a {
+    color: #fff;
+    text-decoration: underline;
 }
 
-footer a:hover{
-  opacity: .85;
+footer a:hover {
+    opacity: .85;
 }
 
 footer .is-active {
-  color: #9dff9d; /* うっすら明るい緑 */
-  font-weight: 700;
+    color: #9dff9d;
+    /* うっすら明るい緑 */
+    font-weight: 700;
 }
 
 
@@ -2641,51 +2672,51 @@ Services（全体）追加スタイル
 /* ===== プライバシーポリシー専用レイアウト ===== */
 
 /* プライバシー専用の余白（お問い合わせと揃える） */
-.page-privacy .section{
-  padding: clamp(28px, 5vw, 64px) 0;
+.page-privacy .section {
+    padding: clamp(28px, 5vw, 64px) 0;
 }
 
 .page-privacy {
-  background: #f6faf7; /* お問い合わせと同じ薄い緑 */
-   padding: 0;
+    background: #f6faf7;
+    /* お問い合わせと同じ薄い緑 */
+    padding: 0;
 }
 
 .privacy-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-  text-align: center; /* 全体中央揃え */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+    /* 全体中央揃え */
 }
 
 /* 見出しの下線を統一 */
-.privacy-title{
-  position: relative;
-  padding-bottom: 24px;
-  margin-bottom: 0%;   
-  text-align: center;
+.privacy-title {
+    position: relative;
+    padding-bottom: 24px;
+    margin-bottom: 0%;
+    text-align: center;
 }
 
-.privacy-title::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:0;
-  width:170px;
-  height:4px;
-  background: var(--accent-700);
-  border-radius:999px;
+.privacy-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 170px;
+    height: 4px;
+    background: var(--accent-700);
+    border-radius: 999px;
 }
 
 
 /* 白いカード */
 .privacy-card {
-  background: #fff;
-  padding: clamp(24px, 4vw, 40px);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
-  text-align: left;
-margin-top: 32px; 
+    background: #fff;
+    padding: clamp(24px, 4vw, 40px);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+    text-align: left;
+    margin-top: 32px;
 }
-
-

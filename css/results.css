@@ -125,10 +125,30 @@
     text-transform: uppercase;
 }
 
-.r-hero__title {
+/* .r-hero__title {
     margin: 0 0 20px;
     font-size: clamp(28px, 4.2vw, 44px);
     line-height: 1.2;
+} */
+
+/* ===============================
+   Hero Title（左ライン）
+=============================== */
+
+.r-hero__title {
+  margin: 0 0 20px;
+  font-size: clamp(28px, 4.2vw, 44px); 
+  font-weight: 700;
+  line-height: 1.2;                   
+  padding-left: 18px;
+  border-left: 4px solid #0b2e13;
+}
+
+@media (max-width: 768px) {
+  .r-hero__title {
+    font-size: 26px;
+    border-left: 4px solid #0b2e13;
+  }
 }
 
 .r-hero__lead {

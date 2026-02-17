@@ -447,7 +447,9 @@
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
   
 }
-/* CTA帯は中央寄せ（親で揃えるのが正解） */
+
+
+/* CTA帯は中央寄せ */
 .cta-band {
   background: #E6F4EA;
   text-align: center;
@@ -460,7 +462,6 @@
   outline: none;
 }
 
-/* resultsの“光が走る”演出を入れたい場合 */
 .cta-band .btn {
   position: relative;
   overflow: hidden;
@@ -504,6 +505,24 @@
   }
 }
 
+.cta-band small{
+  font-size:14px;
+  opacity:.8;
+}
+
+.cta-band .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-band small {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  opacity: .8;
+}
 
 
 
