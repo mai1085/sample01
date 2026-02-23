@@ -1,27 +1,29 @@
 /* =====================================================
-   3S GROUP OFFICIAL SITE - style.css
-   最終更新：2026-02
+3S GROUP OFFICIAL SITE - style.css
+最終更新：2026-02
 
+※対象：共通 + index / products / company / privacy
 
-   【目次】
+=====================================================
 
-   01. Base / Reset / Variables（共通設定）
-   02. Layout / Common Components（container / btn / 見出しなど）
-   03. Header / Navigation（ヘッダー・ナビ・ハンバーガー）
-   04. Hero / Slider（トップビジュアル）
-   05. Products（取扱商品）
-   06. Services（サービス）
-   07. News / PickUp
-   08. Company Page
-   09. Product Detail Pages
-   10. Service Detail Pages
-   11. Footer / SNS
-   12. Animation / Scroll Effects
-   13. Responsive
+01. Base / Layout 
+02. Header / Navigation
+03. hero (index.html用)
+04. Products (index.html用)
+05. Services (index.html用)
+06. News / Pickup  (index.html用)
+07. Footer / SNS (共通)
+08. Animation / Scroll Effects  (index.html用)
+09. company.html 用
+10. products.html 用
+11. services.html 用
+12. privacy.html 用
 
 ===================================================== */
 
-
+/* =====================================================
+01. Base / Layout
+===================================================== */
 
 /* ベース：全ページ共通の初期設定 */
 :root {
@@ -53,6 +55,7 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     margin: 0;
@@ -64,7 +67,6 @@ body {
     color: var(--ink);
     background: #fff;
     overflow-x: clip;
-    /* 横スクロールは基本禁止 */
 }
 
 html.no-scroll {
@@ -97,10 +99,6 @@ li {
     padding-inline: 20px;
 }
 
-/* .section {
-    padding: 32px 0;
-} */
-
 .hd-row {
     display: flex;
     justify-content: space-between;
@@ -109,7 +107,7 @@ li {
     margin-bottom: 20px;
 }
 
-/* ===== News / PickUp の見出し下線 ===== */
+/* =====index.html News / PickUp の見出し下線 ===== */
 .section .hd-row h2 {
     position: relative;
     display: inline-block;
@@ -121,12 +119,9 @@ li {
     position: absolute;
     left: 50%;
     bottom: -6px;
-    /* 文字との余白 */
     transform: translateX(-50%);
     width: 100%;
-    /* 線の長さ */
     height: 3px;
-    /* 線の太さ */
     background-color: var(--accent);
     border-radius: 2px;
 }
@@ -158,6 +153,9 @@ h2 {
     color: var(--accent);
 }
 
+/* =====================================================
+02. Header / Navigation
+===================================================== */
 /* ====== Header / Global Nav ====== */
 header {
     position: sticky;
@@ -169,23 +167,17 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-/* ヘッダーだけ広くする */
 header .container.nav {
     width: min(100%, 1320px);
-    /* 1180 → 1320 に */
 }
 
-/* ヘッダー行：高さはロゴに追従 */
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* gap: 16px;
-    min-height: clamp(80px, 9.5vw, 108px); */
     min-height: clamp(78px, 9vw, 106px);
 }
 
-/* 左：ロゴ＋サイト名 */
 .brand {
     display: flex;
     align-items: center;
@@ -197,7 +189,6 @@ header .container.nav {
 
 .brand img {
     width: auto;
-    /* height: clamp(76px, 8.5vw, 96px); */
     height: clamp(64px, 7.6vw, 84px);
     display: block;
 
@@ -209,7 +200,6 @@ header .container.nav {
     letter-spacing: .02em;
 }
 
-/* 右：ナビ */
 .links {
     display: flex;
     align-items: center;
@@ -228,7 +218,6 @@ header .container.nav {
     background: #f4f7f8;
 }
 
-/* PCナビ：a と button を同じ見た目に揃える */
 .links a,
 .links .nav-link--services {
     color: var(--ink);
@@ -237,16 +226,13 @@ header .container.nav {
     white-space: nowrap;
     line-height: 1;
     font-weight: 500;
-    /* 任意：a と同じ太さに */
 }
 
-/* hoverも揃える */
 .links a:hover,
 .links .nav-link--services:hover {
     background: #f4f7f8;
 }
 
-/* buttonのデフォルトスタイルを完全に消す（Safari対策含む） */
 .nav-link--services {
     appearance: none;
     -webkit-appearance: none;
@@ -255,14 +241,12 @@ header .container.nav {
 }
 
 
-/* インラインCTA */
 .cta-inline {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* navメニュー　PCナビ：サービスの親 */
 .nav-item--services {
     position: relative;
 }
@@ -279,7 +263,6 @@ header .container.nav {
     gap: 0.25rem;
 }
 
-/* ▼マーク少し小さめに */
 .nav-caret {
     font-size: 0.7em;
 }
@@ -305,9 +288,6 @@ header .container.nav {
     white-space: nowrap;
 }
 
-
-/* ===== ナビの現在地（active） ===== */
-
 /* PCだけ下線を使う */
 .links a.is-active {
     color: var(--accent-700);
@@ -326,7 +306,6 @@ header .container.nav {
     background: var(--accent-700);
     border-radius: 999px;
     pointer-events: none;
-    /* クリック妨害を防ぐ */
 }
 
 /* ★スマホでは下線をオフ */
@@ -336,36 +315,23 @@ header .container.nav {
     }
 }
 
-/* ドロワー（ハンバーガー内）は文字色だけ */
 .drawer a.is-active {
     color: var(--accent-700);
     font-weight: 700;
 }
 
-
-
-
-
-/* SPだけ少し抑える（ヘッダーが間延びしない） */
 @media (max-width: 768px) {
     .nav {
         min-height: 76px;
     }
-
-    /* 今のままでもOK */
     .brand img {
         height: 56px;
     }
-
-    /* ← 52px→56pxにするのが効く */
     header .container {
         padding-inline: 16px;
     }
-
-    /* 余白が気になる場合のみ */
 }
 
-/* PC幅ではホバーで表示 */
 @media (min-width: 769px) {
     .nav-item--services:hover .nav-submenu {
         display: block;
@@ -434,38 +400,29 @@ header .container.nav {
     max-width: 360px;
     height: calc(100dvh - 66px);
     background: #d9efe2;
-    /* Aパターン */
     border-left: 1px solid var(--border);
     box-shadow: var(--shadow);
     transform: translate3d(100%, 0, 0);
-    /* 初期は右に隠す */
     transition: transform .28s ease;
     display: flex;
     flex-direction: column;
     padding: 16px;
     will-change: transform;
     overflow-y: auto;
-    /* 中身が長いときは中でスクロール */
-    -webkit-overflow-scrolling: touch;
-    /* iPhoneでヌルっとスクロール */
 }
 
-/* Drawerを開いた状態 */
 .drawer.open {
     transform: translate3d(0, 0, 0);
 }
 
-/* Drawerのリンク装飾 */
 .drawer a {
     padding: 14px 12px;
     border-radius: 12px;
 }
 
-/* 文字色＆太さをまとめて指定 */
 .drawer a,
 .drawer-label {
     color: #0B2E13;
-    /* 濃いグリーンでコントラストUP */
     font-weight: 550;
 }
 
@@ -478,20 +435,15 @@ header .container.nav {
     display: block;
     margin-top: 0.75rem;
     padding: 0.4rem 12px;
-    /* ← ここだけでOK（重複行を1つに） */
     font-weight: 600;
-    /* 見出しだけ少し強めでも良い */
     font-size: 0.95rem;
 }
 
 .drawer-sub {
     padding-left: 1.5rem;
-    /* 少し字下げ */
     font-size: 0.9rem;
 }
 
-
-/* Overlay（背景の黒幕） */
 .overlay {
     position: fixed;
     inset: 0;
@@ -527,17 +479,11 @@ header .container.nav {
         display: none !important;
     }
 
-    /* #hamburger {
-    display: block !important;
-  } */
-
     #hamburger {
         display: flex !important;
-        /* ← block → flex に変更 */
         align-items: center;
         justify-content: center;
         padding: 0;
-        /* 保険：ズレ防止 */
     }
 
     #drawer {
@@ -545,7 +491,9 @@ header .container.nav {
         gap: 1rem;
     }
 }
-
+/* =====================================================
+03. hero index.html用
+===================================================== */
 /* ====== Hero (Wide Slider) ====== */
 .hero {
     margin-top: 0;
@@ -553,12 +501,9 @@ header .container.nav {
     background: transparent;
 }
 
-/* 固定ヘッダー分の余白を確保 */
 #home {
     scroll-margin-top: 100px;
-    /* ← ヘッダーの高さに合わせて調整 */
 }
-
 
 .wideslider {
     position: relative;
@@ -573,7 +518,6 @@ header .container.nav {
 .ws-viewport {
     position: relative;
     width: 100%;
-    /* 背景色や角丸は親(.wideslider)に任せる */
 }
 
 .ws-track {
@@ -594,14 +538,11 @@ header .container.nav {
     background: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, 0));
 }
 
-/* スライド上の被せ物（擬似要素）がクリックを奪わないようにする */
 .ws-slide::before,
 .ws-slide::after {
     pointer-events: none;
 }
 
-
-/* No-crop：どの幅でも切らさない（高さは画像の比率どおり） */
 .ws-slide img {
     width: 100%;
     height: auto;
@@ -613,10 +554,8 @@ header .container.nav {
         padding-inline: clamp(8px, 4vw, 16px);
     }
 
-    /* 余白だけ微調整 */
 }
 
-/* ドット＆矢印（そのままでOK） */
 .ws-dots {
     position: absolute;
     left: 0;
@@ -666,6 +605,10 @@ header .container.nav {
     right: 12px;
 }
 
+
+/* =====================================================
+04. Products (index.html)
+===================================================== */
 /* ====== Products　取扱商品 ====== */
 .products {
     background: #fff;
@@ -676,13 +619,11 @@ header .container.nav {
     position: relative;
     width: 100%;
     height: clamp(180px, 40vw, 420px);
-    /* 帯の高さ */
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     background-size: cover;
     background-position: var(--bgx, 40%) var(--bgy, 32%);
-    /* 見せたい位置 */
     margin-bottom: 3%;
 }
 
@@ -690,9 +631,7 @@ header .container.nav {
 .title-hero__text {
     position: absolute;
     left: var(--tx, 73%);
-    /* X座標（変数がなければ 73%） */
     top: var(--ty, 50%);
-    /* Y座標（変数がなければ 50%） */
     transform: translate(-50%, -50%);
     margin: 0;
 
@@ -704,11 +643,9 @@ header .container.nav {
     text-align: right;
 
     white-space: nowrap;
-    /* 中途半端な幅での2行化を防ぐ */
     letter-spacing: .04em;
     max-width: none;
     z-index: 1;
-    /* 背景より前面に */
 }
 
 /* 見出しの下線 */
@@ -717,22 +654,18 @@ header .container.nav {
     position: absolute;
     left: 50%;
     bottom: -8px;
-    /* 文字との間隔 */
     transform: translateX(-50%);
     width: 100%;
-    /* 文字幅いっぱい */
     height: 3px;
     background-color: var(--accent);
     border-radius: 2px;
 }
 
-/* 狭い幅のときだけ少し小さく・位置調整 */
 @media (max-width: 560px) {
     .title-hero__text {
         font-size: clamp(1.2rem, 5vw, 1.6rem);
         top: 55%;
         white-space: normal;
-        /* モバイルでは折り返し許可 */
         text-align: center;
     }
 }
@@ -751,7 +684,6 @@ header .container.nav {
     gap: 18px;
 }
 
-/* 画面幅ごとのカラム数調整 */
 @media (max-width: 1024px) {
     .product-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -764,7 +696,6 @@ header .container.nav {
     }
 }
 
-/* iPhone SE など、かなり幅が狭い端末向け（1カラム） */
 @media (max-width: 420px) {
     .products .product-grid {
         grid-template-columns: 1fr;
@@ -781,7 +712,6 @@ header .container.nav {
 
     .p-card img {
         max-height: 200px;
-        /* 画像の縦を抑える */
         width: auto;
         margin: 0 auto 12px;
         object-fit: contain;
@@ -796,7 +726,6 @@ header .container.nav {
     background: var(--surface);
     box-shadow: var(--shadow);
     text-align: center;
-    /* 画像・テキスト・ボタンを中央寄せ */
 }
 
 .p-card img {
@@ -824,7 +753,6 @@ header .container.nav {
 .p-card .btn {
     display: block;
     width: 80%;
-    /* PCでも少し内側で中央 */
     padding: .55rem .85rem;
     font-size: .85rem;
     margin: 12px auto 0;
@@ -832,7 +760,9 @@ header .container.nav {
 }
 
 
-
+/* =====================================================
+05. Services (index.html)
+===================================================== */
 /* ====== Services ====== */
 .services {
     background: #e9f5ee;
@@ -845,7 +775,6 @@ header .container.nav {
     gap: 22px;
 }
 
-/* 画面幅ごとのカラム数（PC→3、タブレット→2、スマホ→1） */
 @media (max-width: 960px) {
     .svc-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -870,27 +799,16 @@ header .container.nav {
     box-shadow: var(--shadow);
 }
 
-/* ★ 画像は必ずカード幅いっぱいに表示（右側の白余白対策） */
-/* .svc-card img {
-     width: 100%; 
-     height: auto;
-    display: block; 
-}  */
-
-/* ★ Services：画像の高さを統一（PCも含めてズレ解消） */
 .svc-card img {
     width: 100%;
     height: 240px;
     object-fit: cover;
-    /* ← 画像をトリミングして高さを揃える */
     display: block;
 }
 
-/* スマホで縦長になりすぎないように、必要なら少しだけ高さ制限 */
 @media (max-width: 640px) {
     .svc-card img {
         max-height: 260px;
-        /* 好みに応じて 220〜280px で調整可 */
         object-fit: cover;
     }
 }
@@ -910,23 +828,22 @@ header .container.nav {
     line-height: 1.6;
 }
 
-/* （お好み）スマホではテキストも中央寄せにしたい場合 */
 @media (max-width: 640px) {
     .svc-card {
         text-align: center;
     }
-
     .svc-card p {
         text-align: center;
     }
-
     .svc-card .btn {
         display: inline-block;
         margin-top: 8px;
     }
 }
 
-
+/* =====================================================
+06. News / Pickup  (index.html) 
+===================================================== */
 /* ====== News ====== */
 .news-grid {
     display: grid;
@@ -938,7 +855,6 @@ header .container.nav {
     display: block;
     width: 100%;
     height: var(--news-h);
-    /* 右写真の高さを固定 */
     object-fit: cover;
     border-radius: var(--radius);
 }
@@ -946,18 +862,15 @@ header .container.nav {
 .news-list {
     border-top: 2px solid var(--accent);
     height: var(--news-h);
-    /* max-height は使わない */
     overflow-y: auto;
-    /* 縦スクロール */
     padding-right: 8px;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     scrollbar-width: thin;
-    /* Firefox */
     scrollbar-color: var(--accent) #f1f5f7;
 }
 
-/* スクロールバー（WebKit系） */
+/* スクロールバー */
 .news-list::-webkit-scrollbar {
     width: 10px;
 }
@@ -996,11 +909,9 @@ header .container.nav {
     background: #e9f5ee;
 }
 
-/* カード全体：PCでは画像＋テキストの2カラム */
 .pickup-card {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    /* 左画像：右テキスト */
     gap: 24px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -1009,7 +920,6 @@ header .container.nav {
     padding: 20px;
 }
 
-/* 画像：比率を保ったまま横長に見せる */
 .pickup-card>img {
     width: 100%;
     height: auto;
@@ -1043,7 +953,6 @@ header .container.nav {
 }
 
 
-
 /* クリエイターInstagramのリンク */
 .creator-instagram {
     margin-bottom: 30px;
@@ -1064,7 +973,6 @@ header .container.nav {
 
 /* ---------- レスポンシブ ---------- */
 
-/* タブレット以下：左右の比率を少し縮める */
 @media (max-width: 960px) {
     .pickup-card {
         grid-template-columns: minmax(0, 1.5fr) minmax(0, 2.5fr);
@@ -1072,7 +980,6 @@ header .container.nav {
     }
 }
 
-/* スマホ：画像→テキストの縦並び＋中央揃え */
 @media (max-width: 640px) {
 
     .pickup-card {
@@ -1083,7 +990,6 @@ header .container.nav {
 
     .pickup-card>img {
         max-height: 260px;
-        /* 必要なら 220〜280px で微調整 */
         object-fit: cover;
     }
 
@@ -1101,7 +1007,6 @@ header .container.nav {
         text-align: center;
     }
 
-    /* ボタンも真ん中に揃える */
     .pickup-card .btn {
         display: inline-block;
         margin-inline: auto;
@@ -1109,8 +1014,6 @@ header .container.nav {
 }
 
 
-
-/* PC表示 (幅768px以上) でボタン下の余白だけ少し詰める */
 @media (min-width: 768px) {
     .pickup-card {
         padding-bottom: 12px;
@@ -1122,7 +1025,6 @@ header .container.nav {
 }
 
 /* ====== New Magical 特集 ====== */
-/* 背景はpickupと同色に */
 .pickup-feature {
     background: #e9f5ee;
 }
@@ -1132,7 +1034,6 @@ header .container.nav {
     padding-bottom: 60px;
 }
 
-/* PickUpと同じ“左右比率”にする（←ズレ対策） */
 .pickup-feature--split {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
@@ -1144,37 +1045,29 @@ header .container.nav {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 20px;
-    /* PickUpと同じ */
 }
 
-/* 画像枠（下段だけでもOK） */
 .pickup-feature__media {
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
-
-    /* 濃い背景：深緑グラデ（おすすめ） */
     background: linear-gradient(180deg, #0b2e13 0%, #071c0c 100%);
 }
 
-/* 画像と背景を馴染ませる“薄い幕” */
 .pickup-feature__media::after {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, .12);
-    /* 0.08〜0.16で調整 */
     pointer-events: none;
 }
 
-/* 画像は切らない */
 .pickup-feature__img {
     width: 100%;
     height: 100%;
     display: block;
     max-width: none;
     aspect-ratio: 1 / 1;
-    /* 今の揃いを維持 */
     object-fit: contain;
 }
 
@@ -1193,7 +1086,6 @@ header .container.nav {
     line-height: 1.9;
 }
 
-/* ボタンが横に伸びるのを強制的に止める */
 .pickup-feature__btn {
     width: fit-content;
     max-width: 100%;
@@ -1215,7 +1107,6 @@ header .container.nav {
 }
 
 
-/* SPは今の挙動を維持 */
 @media (max-width: 768px) {
     .pickup-feature--split {
         grid-template-columns: 1fr;
@@ -1233,7 +1124,9 @@ header .container.nav {
 }
 
 
-
+/* =====================================================
+07. Footer / SNS  (共通) 
+===================================================== */
 /* ====== SNS / Footer ====== */
 .sns_text {
     text-align: center;
@@ -1257,8 +1150,6 @@ header .container.nav {
     box-shadow: var(--shadow)
 }
 
-
-
 footer {
     background: #0c3a22;
     color: #e1efe7;
@@ -1278,11 +1169,8 @@ footer a:hover {
 
 footer .is-active {
     color: #9dff9d;
-    /* うっすら明るい緑 */
     font-weight: 700;
 }
-
-
 
 /* ====== Responsive ====== */
 @media (max-width: 1080px) {
@@ -1331,6 +1219,10 @@ footer .is-active {
     }
 }
 
+/* =====================================================
+08. Animation / Scroll Effects  (index.html)
+===================================================== */
+
 /* ==== Scroll-in Animations ==== */
 .title-hero,
 .p-card,
@@ -1349,7 +1241,6 @@ footer .is-active {
     transform: translateY(0);
 }
 
-/* カードの出現を少しランダムに（自然な感じ） */
 .p-card:nth-child(odd),
 .svc-card:nth-child(odd) {
     transition-delay: .06s;
@@ -1361,7 +1252,7 @@ footer .is-active {
 }
 
 /* =========================================================
-   COMPANY PAGE — TOKENS（色・余白・角丸・列幅・文字）
+09-01. company.html  COMPANY PAGE — TOKENS（色・余白・角丸・列幅・文字）
 ========================================================= */
 .page-company {
     --card-bg: #fff;
@@ -1371,7 +1262,6 @@ footer .is-active {
 
     /* ラベル列（th・下段見出し共通） */
     --label-w: 10em;
-    /* 9.6〜10.4emで調整可 */
     --label-fs: .96rem;
     --label-fw: 700;
     --label-color: #0B2E13;
@@ -1384,53 +1274,69 @@ footer .is-active {
     --sec-gap: clamp(18px, 3vw, 28px);
 }
 
+
+
 /* =========================================================
-   HERO（PC/SP 背景切替）
+09-02. company.html HERO（companyだけに効く）
 ========================================================= */
-.page-company .hero-sub {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: clamp(300px, 56vh, 640px);
-    padding: clamp(28px, 6vw, 64px) 0;
-    background: url("../img/company_mv.jpg") center/cover no-repeat;
-    color: #fff;
-    text-align: center;
+.page-company .hero-sub{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: clamp(360px, 70vh, 760px);
+  padding: clamp(28px, 6vw, 64px) 0;
+
+  background-image: url("../img/company_mv.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 57%;
+
+  color: #fff;
+  text-align: center;
 }
 
-.page-company .hero-sub::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, .35);
+.page-company .hero-sub::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.18);
 }
 
-.page-company .page-title {
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    color: #fff;
-    font-weight: 800;
-    font-size: clamp(28px, 3.6vw, 40px);
+.page-company .page-title{
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 40px);
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
 }
 
-.page-company .page-title .sub {
-    display: block;
-    margin-top: .3em;
-    letter-spacing: .08em;
-    color: #f0f0f0;
-    font-size: .8em;
+.page-company .page-title .sub{
+  display: block;
+  margin-top: .3em;
+  letter-spacing: .08em;
+  color: #f0f0f0;
+  font-size: .8em;
 }
 
-@media (max-width:768px) {
-    .page-company .hero-sub {
-        min-height: clamp(150px, 38vh, 520px);
-    }
+@media (max-width:768px){
+  .page-company .hero-sub{
+    min-height: clamp(150px, 38vh, 520px);
+    background-position: 50% 55%; 
+  }
+}
+
+@media (max-width:420px){
+  .page-company .hero-sub{
+    background-position: 52% 55%; 
+  }
 }
 
 /* =========================================================
-   リードブロック
+09-03. company.html リードブロック
 ========================================================= */
 .container.slim {
     padding: 2rem;
@@ -1445,6 +1351,11 @@ footer .is-active {
     font-weight: 800;
     font-size: clamp(26px, 3.2vw, 38px);
     line-height: 2.35;
+}
+
+.page-company .lead-catch{
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .page-company .lead-catch::after {
@@ -1474,7 +1385,7 @@ footer .is-active {
 }
 
 /* =========================================================
-   上段レイアウト（会社情報：表＋外観写真）
+09-04. company.html  上段レイアウト（会社情報：表＋外観写真）
 ========================================================= */
 .page-company .company-info {
     display: grid;
@@ -1490,7 +1401,7 @@ footer .is-active {
 }
 
 /* =========================================================
-   会社情報テーブル（PC=横並び / SP=カード風縦並び）
+09-05. company.html  会社情報テーブル（PC=横並び / SP=カード風縦並び）
 ========================================================= */
 .page-company .company-card {
     background: var(--card-bg);
@@ -1507,7 +1418,6 @@ footer .is-active {
     table-layout: fixed;
     line-height: var(--line-h);
     font-size: 1rem;
-    /* ← 統一サイズ */
 }
 
 .page-company .company-card .table.info th,
@@ -1516,7 +1426,6 @@ footer .is-active {
     padding: 10px 12px;
     text-align: left;
     font-size: 1rem;
-    /* ← th/td とも統一 */
 }
 
 .page-company .company-card .table.info th {
@@ -1536,7 +1445,6 @@ footer .is-active {
     text-indent: .2em;
 }
 
-/* 先頭セル保険 */
 .page-company .company-card .table.info tr>*:first-child {
     border-left: 1px solid var(--card-border);
 }
@@ -1579,7 +1487,7 @@ footer .is-active {
 }
 
 /* =========================================================
-   代表者（PC=2カラム / 狭幅で詰める / 超狭幅は縦）
+09-06. company.html    代表者（PC=2カラム / 狭幅で詰める / 超狭幅は縦）
 ========================================================= */
 .page-company .rep-list {
     display: grid;
@@ -1590,7 +1498,6 @@ footer .is-active {
     margin: 0;
 }
 
-/* 完全統一サイズ */
 .page-company .rep-list dt,
 .page-company .rep-list dd {
     font-size: 1rem;
@@ -1618,7 +1525,6 @@ footer .is-active {
     width: .4em;
 }
 
-/* 幅560px以下：2カラムのまま狭める */
 @media (max-width:560px) {
     .page-company .rep-list {
         grid-template-columns: max-content 1fr;
@@ -1631,20 +1537,18 @@ footer .is-active {
     }
 }
 
-/* 360px以下：縦積みフォールバック */
 @media (max-width:360px) {
     .page-company .rep-list {
         grid-template-columns: 1fr;
         column-gap: 0;
     }
-
     .page-company .rep-list dd {
         white-space: normal;
     }
 }
 
 /* =========================================================
-   外観写真（カード）
+09-07. company.html    外観写真（カード）
 ========================================================= */
 .page-company .photo {
     background: var(--card-bg);
@@ -1665,23 +1569,19 @@ footer .is-active {
 
 
 /* =========================================================
-   下段：事業内容〜主要取引先（2カラム“行カード”）
+09-08. company.html  下段：事業内容〜主要取引先（2カラム“行カード”）
 ========================================================= */
 .page-company .stack {
     gap: var(--sec-gap);
 }
 
-/* 行カード：左=見出し / 右=本文（表thと文字フェイス統一） */
 .page-company .stack .card {
     display: grid;
     grid-template-columns: var(--label-w) 1fr;
-    /* thと同じラベル幅 */
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
     overflow: hidden;
-    /* 角丸は外周のみ → デフォルトは“0”にして、
-     first/last-child だけで丸める（下のブロック参照） */
     border-radius: 0;
 }
 
@@ -1721,7 +1621,6 @@ footer .is-active {
     text-decoration: underline;
 }
 
-/* スマホ：1カラムに落とす（見出し→本文） */
 @media (max-width:640px) {
     .page-company .stack .card {
         grid-template-columns: 1fr;
@@ -1739,7 +1638,6 @@ footer .is-active {
     }
 }
 
-/* 角丸：内側は四角、外周だけ丸く（上=first、下=last） */
 .page-company .stack .card:first-child {
     border-top-left-radius: var(--card-radius);
     border-top-right-radius: var(--card-radius);
@@ -1750,7 +1648,6 @@ footer .is-active {
     border-bottom-right-radius: var(--card-radius);
 }
 
-/* 左ラベル面の角も外周に合わせる */
 .page-company .stack .card .hd {
     border-radius: 0;
 }
@@ -1763,7 +1660,6 @@ footer .is-active {
     border-bottom-left-radius: var(--card-radius);
 }
 
-/* SP時はラベルが上に来るので “上” を丸める */
 @media (max-width:640px) {
     .page-company .stack .card:first-child .hd {
         border-top-left-radius: var(--card-radius);
@@ -1777,23 +1673,19 @@ footer .is-active {
 }
 
 /* =========================================================
-   アクセス（住所＋地図）— Company 共通トーンに準拠
+09-09. company.html   アクセス（住所＋地図）— Company 共通トーンに準拠
 ========================================================= */
 
-/* アクセス（grid-2全体を背景色で） */
 .access .grid-2 {
     background-color: #f9f9f9;
-    /* 淡いグレーでもOK */
     padding: 2rem;
     border-radius: var(--radius, 12px);
     gap: 2rem;
 }
 
-/* レイアウト：PC=2カラム / SP=1カラム */
 .page-company .access .grid-2 {
     display: grid;
     grid-template-columns: 0.95fr 1.05fr;
-    /* 左=住所 / 右=地図（好みで調整） */
     align-items: start;
     gap: var(--sec-gap);
 }
@@ -1804,7 +1696,6 @@ footer .is-active {
     }
 }
 
-/* 住所：プレーン表示（枠・角丸・影なし） */
 .page-company .access address {
     background: transparent;
     border: 0;
@@ -1813,21 +1704,17 @@ footer .is-active {
     overflow: visible;
     padding: 0;
     font-style: normal;
-    /* address の斜体を無効化 */
     line-height: var(--line-h);
 }
 
 .page-company .access address p {
     margin: 0 0 .6em;
-    /* 少しだけ下に間隔 */
     color: #0B2E13;
-    /* 統一の濃緑 */
     font-weight: 800;
     font-size: clamp(1.06rem, 1rem + 0.45vw, 1.22rem);
     letter-spacing: .02em;
 }
 
-/* 地図：カードトーン（フチまで地図を表示） */
 .page-company .access .map {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -1835,13 +1722,11 @@ footer .is-active {
     box-shadow: var(--card-shadow);
     overflow: hidden;
     padding: 0;
-    /* 余白なし＝地図を端まで */
 }
 
 .page-company .access .map iframe {
     width: 100%;
     height: min(60vh, 420px);
-    /* お好みで 460px 等に調整可 */
     border: 0;
     display: block;
 }
@@ -1852,38 +1737,29 @@ footer .is-active {
 
 
 /* =====================================================================
-   Products: Hero（背景直指定＋右テキスト／PC-SP共通）
-   ※ style.css は /css/ にあるので、相対は ../img/ でOK
+10-01. products.html  Products: Hero（背景直指定＋右テキスト／PC-SP共通）
 ===================================================================== */
 .hero-products--bg {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    /* 右寄せ配置 */
     min-height: clamp(300px, 56vh, 640px);
     padding: clamp(20px, 6vw, 64px) 0;
-
-    /* 背景（PC） */
     background-image: url("../img/products_title.jpg");
     background-position: center 28%;
-    /* 見せ位置の微調整はここで */
     background-size: cover;
     background-repeat: no-repeat;
-
     overflow: hidden;
 }
 
-/* うっすら暗くしたい場合は値を上げる（0〜0.35 くらい） */
 .hero-products--bg::after {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0);
-    /* 例：0.18 などにすると可読性UP */
 }
 
-/* テキスト側（既存クラスを継続利用） */
 .hero-products__inner {
     position: absolute;
     inset: 0;
@@ -1940,18 +1816,16 @@ footer .is-active {
     color: var(--muted);
 }
 
-/* SP：高さだけ控えめに（背景は同じ画像を使用） */
 @media (max-width: 768px) {
     .hero-products--bg {
         min-height: clamp(180px, 44vh, 420px);
         background-position: center 22%;
-        /* SPの見せ位置調整 */
     }
 }
 
 
 /* =========================================
-   商品詳細（SP→PC） クリーン版（整理済み）
+10-02. products.html 商品詳細（SP→PC） クリーン版（整理済み）
    ========================================= */
 
 /* --- セクション枠 & コンテナ --- */
@@ -2121,15 +1995,11 @@ footer .is-active {
 }
 
 .pd .cta {
-    /* 行そのものを本文幅に合わせたい場合だけ有効に（任意） */
     max-width: 1120px;
-    /* ← 任意：本文幅に揃える */
     margin: 0 auto;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* ど真ん中 */
     align-items: center;
     gap: 10px 12px;
     text-align: center;
@@ -2180,14 +2050,13 @@ footer .is-active {
     /* PC用2枚は非表示 */
     .product-section .p-main {
         max-width: clamp(220px, 72vw, 380px);
-        /* メイン画像少し小さく */
         margin-left: auto;
         margin-right: auto;
     }
 }
 
 /* =========================================
-   PC（>=980px）
+10-03. products.html    PC（>=980px）
    ========================================= */
 @media (min-width: 980px) {
 
@@ -2238,7 +2107,6 @@ footer .is-active {
     .product-section .p-visuals .p-main,
     .product-section .p-visuals .p-subimages figure {
         aspect-ratio: 1 / 1;
-        /* 画像枠を正方形に */
     }
 
     .product-section .p-visuals img {
@@ -2261,8 +2129,6 @@ footer .is-active {
     }
 
     /* SP用はPCで非表示 */
-
-    /* 仕様テーブル見出し幅をやや広く（右幅確保） */
     .product-section .spec th {
         width: clamp(120px, 26%, 220px);
     }
@@ -2270,7 +2136,7 @@ footer .is-active {
 
 
 /* =============================
-Services（全体）追加スタイル
+11-01. services.html   Services（全体）追加スタイル
 ============================= */
 
 .page-services .hero-sub,
@@ -2510,8 +2376,9 @@ Services（全体）追加スタイル
 
 
 /* =====================================================================
-   services: Hero（背景直指定＋右テキスト／PC-SP共通）
-   ※ carpet_service.htmlとservice.html Heroは同じ。
+11-02. services.html  services: Hero（背景直指定＋右テキスト／PC-SP共通）
+※ carpet_service.htmlとservice.html Heroは同じ。
+（※将来 services.css へ分離予定）
 ===================================================================== */
 .hero-services--bg {
     position: relative;
@@ -2524,21 +2391,17 @@ Services（全体）追加スタイル
     /* 背景（PC） */
     background-image: url("../img/services_title.jpg");
     background-size: cover;
-    /* ← 余白を防ぐため coverに戻す */
     background-position: center 38%;
-    /* ← 38%→45%などで人物の位置を調整 */
     background-repeat: no-repeat;
     overflow: hidden;
 
 }
 
-/* うっすら暗くしたい場合は値を上げる（0〜0.35 くらい） */
 .hero-services--bg::after {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0);
-    /* 例：0.18 などにすると可読性UP */
 }
 
 /* テキスト側（既存クラスを継続利用） */
@@ -2598,12 +2461,10 @@ Services（全体）追加スタイル
     color: var(--muted);
 }
 
-/* SP：高さだけ控えめに（背景は同じ画像を使用） */
 @media (max-width: 768px) {
     .hero-services--bg {
         min-height: clamp(180px, 44vh, 420px);
         background-position: center 22%;
-        /* SPの見せ位置調整 */
     }
 }
 
@@ -2614,7 +2475,6 @@ Services（全体）追加スタイル
 .bnr-section {
     padding: 40px 0 48px;
     margin-top: 40px;
-    /* CTAとの間の余白 */
     background: #f7faf8;
 }
 
@@ -2668,17 +2528,17 @@ Services（全体）追加スタイル
     color: #0a5b1e;
 }
 
-/* privacyページ用（共通で使ってOK） */
-/* ===== プライバシーポリシー専用レイアウト ===== */
 
-/* プライバシー専用の余白（お問い合わせと揃える） */
+/* =============================
+12. privacy.html  プライバシーポリシー専用レイアウト
+============================= */
+/* お問い合わせページと合わせる */
 .page-privacy .section {
     padding: clamp(28px, 5vw, 64px) 0;
 }
 
 .page-privacy {
     background: #f6faf7;
-    /* お問い合わせと同じ薄い緑 */
     padding: 0;
 }
 
@@ -2687,10 +2547,8 @@ Services（全体）追加スタイル
     margin: 0 auto;
     padding: 0 16px;
     text-align: center;
-    /* 全体中央揃え */
 }
 
-/* 見出しの下線を統一 */
 .privacy-title {
     position: relative;
     padding-bottom: 24px;
@@ -2709,7 +2567,6 @@ Services（全体）追加スタイル
     background: var(--accent-700);
     border-radius: 999px;
 }
-
 
 /* 白いカード */
 .privacy-card {
